@@ -1,0 +1,202 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+    <!-- Widgets  -->
+    
+
+    <div class="row">
+
+{% comment %} booking {% endcomment %}
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-1">
+                            <i class="fa fa-cart-plus"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ booking }}</span></div>
+                                <div class="stat-heading">Booking</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        {% comment %} client {% endcomment %}
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-3">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ client }}</span></div>
+                                <div class="stat-heading">Client</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-truck"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ vehicle }}</span></div>
+                                <div class="stat-heading">Vehicles</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-3">
+                            <i class="fa fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ driver }}</span></div>
+                                <div class="stat-heading">Drivers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-chevron-circle-down"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ vehiclemaintanance }}</span></div>
+                                <div class="stat-heading">Vehicles Under Maintanance</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-2">
+                            <i class="fa fa-product-hunt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ product }}</span></div>
+                                <div class="stat-heading">Product</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        
+    </div>
+    <!-- /Widgets -->
+    
+    <div class="clearfix"></div>
+
+    <!-- Bookings -->
+    <div class="bookings">
+        <div class="row">
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="box-title">Bookings</h4>
+                    </div>
+                    <div class="card-body--">
+                        <div class="table-stats booking-table ov-h">
+                            <table class="table ">
+                                <thead>
+                                    <tr>
+                                        <th class="serial">#</th>
+                                        <th>Bilty No.</th>
+                                        <th>Client</th>
+                                        <th>Product</th>
+                                        <th>Vehicle</th>
+                                        <th>Driver</th>
+                                        <th>Loading Date</th>
+                                        <th>Origin</th>
+                                        <th>Destination</th>
+                                        <th>Freight_Amount</th>
+                                        <th>Created Date</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if bookings %}
+                                    {% for booking in bookings %}
+                                    <tr>
+                                        <td class="serial">{{ forloop.counter }}</td>
+                                        <td>{{ booking.id }}</td>
+                                        <td>{{ booking.client }}</td>
+                                        <td>{{ booking.product }}</td>
+                                        <td>{{ booking.vehicle }}</td>
+                                        <td>{{ booking.driver }}</td>
+                                        <td>{{ booking.loading_date }}</td>
+                                        <td>{{ booking.location_from }}</td>
+                                        <td>{{ booking.location_to }}</td>
+                                        <td>{{ booking.freight_amount }}</td>
+                                        <td>{{ booking.created_date }}</td>
+                                        <td>
+                                            {% if booking.status == 'pending' %}
+                                                <a class="btn btn-warning" href="">{{ booking.status }}</a>
+                                            {% elif booking.status == 'decline' %}
+                                                <a class="btn btn-danger" href="">{{ booking.status }}</a>
+                                            {% elif booking.status == 'complete' %}
+                                                <a class="btn btn-success" href="">{{ booking.status }}</a>
+                                            {% elif booking.status == 'approved' %}
+                                                <a class="btn btn-primary" href="">{{ booking.status }}</a>
+                                            {% elif booking.status == 'bulk' %}
+                                                <a class="btn btn-secondary" href="">{{ booking.status }}</a>
+                                            {% else %}
+                                                <a class="btn btn-info" href="">{{ booking.status }}</a>
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% else %}
+                                        <tr><td>No Booking Data</td></tr>
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div> <!-- /.table-stats -->
+                    </div>
+                </div> <!-- /.card -->
+            </div>  <!-- /.col-lg-8 -->
+
+            
+        </div>
+    </div>
+    <!-- /.bookings -->
+{% endblock content %}

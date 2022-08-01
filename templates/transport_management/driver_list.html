@@ -1,0 +1,82 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Driver List{% endblock title %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Driver</a></li>
+                            <li class="active">List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Driver List </h4>
+            </div>
+            <div class="card-body--">
+                <div class="table-stats order-table ov-h">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th class="serial">#</th>
+                                <th>Name</th>
+                                <th>Phone No</th>
+                                <th>Aadhar Card No</th>
+                                {% comment %} <th>id</th> {% endcomment %}
+                                <th>Liscence No</th>
+                                <th>Liscence Expiry Date</th>
+                                <th>Joining Date</th>
+                                {% comment %} <th>Created Date</th> {% endcomment %}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if driver %}
+                            {% for driver in driver %}
+                            <tr>
+                                <td class="serial">{{ forloop.counter }}</td>
+                                <td>{{ driver.name }}</td>
+                                <td>{{ driver.phone_number }}</td>
+                                <td>{{ driver.aadhar_card_no }}</td>
+                                {% comment %} <td>{{ driver.id }}</td> {% endcomment %}
+                                <td>{{ driver.liscence_no }}</td>
+                                <td>{{ driver.liscence_expiry_date }}</td>
+                                <td>{{ driver.joining_date }}</td>
+                                {% comment %} <td>{{ driver.created_date }}</td> {% endcomment %}
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr><td>No Driver Data</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div> <!-- /.table-stats -->
+            </div>
+        </div> <!-- /.card -->
+    </div>  <!-- /.col-lg-8 -->
+
+    
+</div>
+{% endblock content %}

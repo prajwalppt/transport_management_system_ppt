@@ -1,0 +1,93 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Vehicle Maintanance List{% endblock title %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Vehicle Maintanance</a></li>
+                            <li class="active">List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Vehicle Maintanance List </h4>
+            </div>
+            <div class="card-body--">
+                <div class="table-stats vehiclemaintanance-table ov-h">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th class="serial">#</th>
+                                <th>Vehicle No.</th>
+                                <th>Odometer Reading</th>
+                                <th>oil changed</th>
+                                <th>Spare parts replaced</th>
+                                <th>Total cost of maintenance(₹)</th>
+                                <th>Date of initialization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if vehiclemaintanance %}
+                            {% for vehiclemaintanance in vehiclemaintanance %}
+                            <tr>
+                                <td class="serial">{{ forloop.counter }}</td>
+                                <td>{{ vehiclemaintanance.vehicle_no }}</td>
+                                <td>{{ vehiclemaintanance.odometer_reading }}</td>
+                                <td>{{ vehiclemaintanance.oil_changed }}</td>
+                                <td>{{ vehiclemaintanance.spare_parts_replaced }}</td>
+                                <td>{{ vehiclemaintanance.total_cost_of_maintenance }}</td>
+                                <td>{{ vehiclemaintanance.date_of_initialization }}</td>
+                                <!-- <td>
+                                    {% if vehiclemaintanance.status == 'pending' %}
+                                        <a class="btn btn-warning" href="">{{ vehiclemaintanance.status }}</a>
+                                    {% elif vehiclemaintanance.status == 'decline' %}
+                                        <a class="btn btn-danger" href="">{{ vehiclemaintanance.status }}</a>
+                                    {% elif vehiclemaintanance.status == 'complete' %}
+                                        <a class="btn btn-success" href="">{{ vehiclemaintanance.status }}</a>
+                                    {% elif vehiclemaintanance.status == 'approved' %}
+                                        <a class="btn btn-primary" href="">{{ vehiclemaintanance.status }}</a>
+                                    {% elif vehiclemaintanance.status == 'bulk' %}
+                                        <a class="btn btn-secondary" href="">{{ vehiclemaintanance.status }}</a>
+                                    {% else %}
+                                        <a class="btn btn-info" href="">{{ vehiclemaintanance.status }}</a>
+                                    {% endif %}
+                                </td> -->
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr><td>No vehiclemaintanance Data</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div> <!-- /.table-stats -->
+            </div>
+        </div> <!-- /.card -->
+    </div>  <!-- /.col-lg-8 -->
+
+    
+</div>
+{% endblock content %}
