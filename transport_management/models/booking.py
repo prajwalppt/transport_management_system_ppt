@@ -4,11 +4,12 @@ from . import Client, Vehicle, Product, Driver
 class Booking(models.Model):
     STATUS_CHOICE = (
         ('pending', 'Pending'),
-        ('decline', 'Decline'),
-        ('approved', 'Approved'),
         ('processing', 'Processing'),
-        ('complete', 'Complete'),
         ('deliverd', 'Delivered'),
+        ('approved', 'Approved'),
+        ('complete', 'Complete'),
+        ('decline', 'Decline'),   
+        
     )
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
     vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE)

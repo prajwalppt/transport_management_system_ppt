@@ -170,17 +170,17 @@
                                         <td>{{ booking.created_date }}</td>
                                         <td>
                                             {% if booking.status == 'pending' %}
-                                                <a class="btn btn-warning" href="">{{ booking.status }}</a>
+                                                <a class="btn btn-warning" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% elif booking.status == 'decline' %}
-                                                <a class="btn btn-danger" href="">{{ booking.status }}</a>
+                                                <a class="btn btn-danger" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% elif booking.status == 'complete' %}
-                                                <a class="btn btn-success" href="">{{ booking.status }}</a>
+                                                <a class="btn btn-success" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% elif booking.status == 'approved' %}
-                                                <a class="btn btn-primary" href="">{{ booking.status }}</a>
+                                                <a class="btn btn-primary" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% elif booking.status == 'bulk' %}
-                                                <a class="btn btn-secondary" href="">{{ booking.status }}</a>
+                                                <a class="btn btn-secondary" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% else %}
-                                                <a class="btn btn-info" href="">{{ booking.status }}</a>
+                                                <a class="btn btn-info" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% endif %}
                                         </td>
                                     </tr>
