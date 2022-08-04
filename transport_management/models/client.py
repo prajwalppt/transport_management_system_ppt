@@ -1,5 +1,5 @@
 from django.db import  models
-
+import email
 class Client(models.Model):
 
     name = models.CharField(max_length=50, unique=True)

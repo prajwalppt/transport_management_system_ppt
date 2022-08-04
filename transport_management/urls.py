@@ -1,25 +1,6 @@
 from django.urls import path
 from django.conf.urls import include
 
-# from .views import (
-#     create_supplier,
-#     create_buyer,
-#     create_season,
-#     create_drop,
-#     create_product,
-#     create_order,
-#     create_delivery,
-#     SupplierListView,
-#     BuyerListView,
-#     SeasonListView,
-#     DropListView,
-#     ProductListView,
-#     OrderListView,
-#     DeliveryListView,
-#     delete_supplier,
-#     update_supplier,
-#     order_update
-# )
 
 from .views import (
     create_client,
@@ -29,6 +10,7 @@ from .views import (
     create_product,
     create_booking,
     update_booking,
+    create_expense,
 
 
     ClientListView,
@@ -36,7 +18,8 @@ from .views import (
     VehicleMaintananceListView,
     DriverListView,
     ProductListView,
-    BookingListView
+    BookingListView,
+    ExpenseListView
 
 )
 
@@ -54,8 +37,9 @@ urlpatterns = [
     path('product-list/', ProductListView.as_view(), name='product-list'),
     path('create-booking/', create_booking, name='create-booking'),
     path('booking-list/', BookingListView.as_view(), name='booking-list'),
-    path('update-booking/<int:id>/', update_booking, name='update-booking')
-    
+    path('update-booking/<int:id>/', update_booking, name='update-booking'),
+    path('create-expense/', create_expense, name='create-expense'),
+    path('expense-list/', ExpenseListView.as_view(), name='expense-list'),
 ]
 
 

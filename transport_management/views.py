@@ -4,14 +4,14 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
-
+from django import forms
 # Create your views here.
 
 from users.models import User
 
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense
 
-from .forms import (ClientForm, VehicleForm, VehicleMaintananceForm, DriverForm, ProductForm, BookingForm, BookingUpdateForm)
+from .forms import (ClientForm, VehicleForm, VehicleMaintananceForm, DriverForm, ProductForm, BookingForm, BookingUpdateForm, ExpenseForm,)
 
 
 # from users.models import User
@@ -115,6 +115,7 @@ def create_vehiclemaintanance(request):
         'form': forms
     }
     return render(request, 'transport_management/create_vehiclemaintanance.html', context)
+    queryset = VehicleMaintanance.objects.filter( Q(under_maintanance='yes'))
 
 
 class VehicleMaintananceListView(ListView):
@@ -200,6 +201,7 @@ class BookingListView(ListView):
         context['booking'] = Booking.objects.all().order_by('-id')
         return context
 
+
 @login_required(login_url='login')
 def update_booking(request,id):
     data = Booking.objects.get(pk=id)
@@ -211,6 +213,24 @@ def update_booking(request,id):
         form = BookingUpdateForm(instance=data)
         context = { 'form': form }
         return render(request, 'transport_management/update_booking.html', context)
+
+
+#Expense views
+@login_required(login_url='login')
+def create_expense(request):
+    forms = ExpenseForm()
+    if request.method == 'POST':
+        forms = ExpenseForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('expense-list')
+    return render(request, 'transport_management/create_expense.html', {'form': forms })
+
+class ExpenseListView(ListView):
+    model = Expense
+    template_name = 'transport_management/expense_list.html'
+    context_object_name = 'expense'
+
 
 # @login_required(login_url='login')
 # def delete_supplier(request,id):

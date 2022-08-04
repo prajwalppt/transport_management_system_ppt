@@ -43,6 +43,7 @@
                             <tr>
                                 <th class="serial">#</th>
                                 <th>Vehicle No.</th>
+                                <th>Currently Under Maintenance</th>
                                 <th>Odometer Reading</th>
                                 <th>oil changed</th>
                                 <th>Spare parts replaced</th>
@@ -56,6 +57,7 @@
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
                                 <td>{{ vehiclemaintanance.vehicle_no }}</td>
+                                <td>{{ vehiclemaintanance.under_maintanance }}</td>
                                 <td>{{ vehiclemaintanance.odometer_reading }}</td>
                                 <td>{{ vehiclemaintanance.oil_changed }}</td>
                                 <td>{{ vehiclemaintanance.spare_parts_replaced }}</td>

@@ -3,11 +3,8 @@ from pyexpat import model
 from django import forms
 from django.forms import ModelForm
 # from matplotlib.pyplot import cla
-# from .models import Booking, Supplier, Vehical, Driver, Goods
 
-# from .models import Season, Drop, Product, Order, Delivery,VehicleMaintanance
-
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Booking
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Booking, Expense
 
 
 #clientform
@@ -140,6 +137,7 @@ class DriverForm(forms.Form):
         'data-val-required': 'Please enter remarks',
     }))
 
+
 #productform
 class ProductForm(forms.Form):
     name = forms.CharField(widget=forms.TextInput(attrs={
@@ -158,6 +156,7 @@ class ProductForm(forms.Form):
         'data-val': 'true',
         'data-val-required': 'Please enter weight',
     }))
+
 
 #bookingform
 class BookingForm(forms.ModelForm):
@@ -244,6 +243,36 @@ class BookingUpdateForm(forms.ModelForm):
             }),
         }
 
+
+#expenseform
+class ExpenseForm(forms.ModelForm):
+    class Meta:
+        model = Expense
+        fields = ['booking_no','diesel','fastag','driver_expense','uncertainty','miscellaneous', 'expense_date']
+
+        widgets = {
+            'booking_no': forms.Select(attrs={
+                'class': 'form-control', 'id': 'booking_no'
+            }),
+            'diesel': forms.NumberInput(attrs={
+                'class': 'form-control datetimepicker-input', 'id': 'diesel'
+            }),
+            'fastag': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'fastag'
+            }),
+            'driver_expense': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'driver_expense'
+            }),
+            'uncertainty': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'uncertainty'
+            }),
+            'miscellaneous': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'miscellaneous'
+            }),
+            'expense_date': forms.DateInput(attrs={
+                'class': 'form-control', 'id': 'datepicker1'
+            }),
+        }
 
 # class SupplierFormUpdate(forms.ModelForm):
 #     class Meta:
