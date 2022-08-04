@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Create Delivery{% endblock title %}
+{% block title %}Create POD{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Delivery</a></li>
+                            <li><a href="#">POD</a></li>
                             <li class="active">Create</li>
                         </ol>
                     </div>
@@ -34,7 +34,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">Create Delivery</strong>
+                <strong class="card-title">Create POD</strong>
             </div>
             <div class="card-body">
                 <!-- Credit Card -->
@@ -42,7 +42,8 @@
                     <div class="card-body">
                         <form action="#" method="post" novalidate="novalidate">
                             {% csrf_token %}
-                            <div class="form-group">
+                            {{form}}<br>
+                            {% comment %} <div class="form-group">
                                 <label for="order" class="control-label mb-1">Order</label>
                                 {{ form.order }}
                             </div>
@@ -50,9 +51,9 @@
                                 <label for="courier_name" class="control-label mb-1">Courier Name</label>
                                 {{ form.courier_name }}
                             </div>
-                            <div>
+                            <div> {% endcomment %}
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
-                                    <span id="payment-button-amount">Create Delivery</span>
+                                    <span id="payment-button-amount">Create POD</span>
                                 </button>
                             </div>
                         </form>

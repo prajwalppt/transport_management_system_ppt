@@ -9,9 +9,9 @@ from django import forms
 
 from users.models import User
 
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod
 
-from .forms import (ClientForm, VehicleForm, VehicleMaintananceForm, DriverForm, ProductForm, BookingForm, BookingUpdateForm, ExpenseForm,)
+from .forms import (ClientForm, VehicleForm, VehicleMaintananceForm, DriverForm, ProductForm, BookingForm, BookingUpdateForm, ExpenseForm, PodForm)
 
 
 # from users.models import User
@@ -230,6 +230,22 @@ class ExpenseListView(ListView):
     model = Expense
     template_name = 'transport_management/expense_list.html'
     context_object_name = 'expense'
+
+#POD views
+@login_required(login_url='login')
+def create_pod(request):
+    forms = PodForm()
+    if request.method == 'POST':
+        forms = PodForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('pod-list')
+    return render(request, 'transport_management/create_pod.html', {'form': forms })
+
+class PodListView(ListView):
+    model = Pod
+    template_name = 'transport_management/pod_list.html'
+    context_object_name = 'pod'
 
 
 # @login_required(login_url='login')

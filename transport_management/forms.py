@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ModelForm
 # from matplotlib.pyplot import cla
 
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Booking, Expense
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Booking, Expense, Pod
 
 
 #clientform
@@ -273,6 +273,32 @@ class ExpenseForm(forms.ModelForm):
                 'class': 'form-control', 'id': 'datepicker1'
             }),
         }
+
+
+#podform
+class PodForm(forms.ModelForm):
+    class Meta:
+        model = Pod
+        fields = ['booking_no','received','received_date','aknowledgement','remarks']
+
+        widgets = {
+            'booking_no': forms.Select(attrs={
+                'class': 'form-control', 'id': 'booking_no'
+            }),
+            'received': forms.Select(attrs={
+                'class': 'form-control', 'id': 'received'
+            }),
+            'received_date': forms.DateInput(attrs={
+                'class': 'form-control', 'id': 'datepicker1'
+            }),
+            'aknowledgement': forms.Select(attrs={
+                'class': 'form-control', 'id': 'aknowledgement'
+            }),
+            'remarks': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'remarks'
+            }),           
+        }
+
 
 # class SupplierFormUpdate(forms.ModelForm):
 #     class Meta:

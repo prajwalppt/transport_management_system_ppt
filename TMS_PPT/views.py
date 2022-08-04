@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Max, Min, Sum
 
 # from transport_management.models import Product, Supplier, Buyer, Order
-from transport_management.models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense
+from transport_management.models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod
 
 def total_expense(self):
     total = Expense.objects.aggregate(TOTAL = Sum('diesel'))['TOTAL']
@@ -23,6 +23,8 @@ def dashboard(request):
     total_expense = Expense.objects.aggregate(total = Sum('diesel'))['total']
     print(total_expense)
     bookings = Booking.objects.all().order_by('-id')
+    total_pod = Pod.objects.filter(received='yes').count()
+    total_aknowledgement = Pod.objects.filter(aknowledgement='not ok').count()
     context = {
         'client': total_client,
         'vehicle': total_vehicle,
@@ -31,7 +33,10 @@ def dashboard(request):
         'product': total_product,
         'booking': total_booking,
         'bookings': bookings,
-        'expenses': total_expense
+        'expenses': total_expense,
+        'pod': total_pod,
+        'aknowledgement': total_aknowledgement,
+        
 
     }
   

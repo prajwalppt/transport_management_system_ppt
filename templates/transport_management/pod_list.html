@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Delivery List{% endblock title %}
+{% block title %}POD List{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Delivery</a></li>
+                            <li><a href="#">POD</a></li>
                             <li class="active">List</li>
                         </ol>
                     </div>
@@ -34,7 +34,7 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="box-title">Delivery List </h4>
+                <h4 class="box-title">POD List </h4>
             </div>
             <div class="card-body--">
                 <div class="table-stats order-table ov-h">
@@ -42,23 +42,29 @@
                         <thead>
                             <tr>
                                 <th class="serial">#</th>
-                                <th>Order</th>
-                                <th>Courier Name</th>
-                                <th>Date</th>
+                                <th>Bilty No</th>
+                                <th>Received</th>
+                                <th>Received Date</th>
+                                <th>Aknowledgement</th>
+                                <th>Remarks</th>
+                                <th>Created Date</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if delivery %}
-                            {% for delivery in delivery %}
+                            {% if pod %}
+                            {% for pod in pod %}
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
-                                <td>{{ delivery.order }}</td>
-                                <td>{{ delivery.courier_name }}</td>
-                                <td>{{ delivery.created_date }}</td>
+                                <td>{{ pod.booking_no }}</td>
+                                <td>{{ pod.received }}</td>
+                                <td>{{ pod.received_date }}</td>
+                                <td>{{ pod.aknowledgement }}</td>
+                                <td>{{ pod.remarks }}</td>
+                                <td>{{ pod.created_date }}</td>
                             </tr>
                             {% endfor %}
                             {% else %}
-                                <tr><td>No Delivery Data</td></tr>
+                                <tr><td>No POD Data</td></tr>
                             {% endif %}
                         </tbody>
                     </table>
