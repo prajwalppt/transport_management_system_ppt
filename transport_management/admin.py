@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.views.generic import ListView
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod, Payment
 
 
 # Register your models here.
@@ -28,6 +28,8 @@ class ExpenseAdmin(admin.ModelAdmin):
 class PodAdmin(admin.ModelAdmin):
     list_display = ['booking_no','received','received_date','aknowledgement','remarks']
 
+class PaymentAdmin(admin.ModelAdmin):
+    list_display = ['booking_no','amount','mode','transaction_no','payment_date']
 
 admin.site.register(Client, ClientAdmin)
 admin.site.register(Vehicle, VehicleAdmin)
@@ -37,3 +39,4 @@ admin.site.register(Product, ProductAdmin)
 admin.site.register(Booking, BookingAdmin)
 admin.site.register(Expense, ExpenseAdmin)
 admin.site.register(Pod, PodAdmin)
+admin.site.register(Payment, PaymentAdmin)

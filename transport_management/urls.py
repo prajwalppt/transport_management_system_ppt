@@ -12,6 +12,7 @@ from .views import (
     update_booking,
     create_expense,
     create_pod,
+    create_payment,
 
 
     ClientListView,
@@ -22,6 +23,7 @@ from .views import (
     BookingListView,
     ExpenseListView,
     PodListView,
+    PaymentListView,
 
 
 )
@@ -45,6 +47,8 @@ urlpatterns = [
     path('expense-list/', ExpenseListView.as_view(), name='expense-list'),
     path('create-pod/', create_pod, name='create-pod'),
     path('pod-list/', PodListView.as_view(), name='pod-list'),
+    path('create-payment/', create_payment, name='create-payment'),
+    path('payment-list/', PaymentListView.as_view(), name='payment-list'),
 ]
 
 

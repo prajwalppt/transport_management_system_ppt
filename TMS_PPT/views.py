@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Max, Min, Sum
 
 # from transport_management.models import Product, Supplier, Buyer, Order
-from transport_management.models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod
+from transport_management.models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod, Payment
 
 def total_expense(self):
     total = Expense.objects.aggregate(TOTAL = Sum('diesel'))['TOTAL']
@@ -25,6 +25,9 @@ def dashboard(request):
     bookings = Booking.objects.all().order_by('-id')
     total_pod = Pod.objects.filter(received='yes').count()
     total_aknowledgement = Pod.objects.filter(aknowledgement='not ok').count()
+    total_payment = Payment.objects.aggregate(total = Sum('amount'))['total']
+
+
     context = {
         'client': total_client,
         'vehicle': total_vehicle,
@@ -36,25 +39,12 @@ def dashboard(request):
         'expenses': total_expense,
         'pod': total_pod,
         'aknowledgement': total_aknowledgement,
+        'payment': total_payment,
         
 
     }
   
 
-
-    # total_product = Product.objects.count()
-    # total_supplier = Supplier.objects.count()
-    # total_buyer = Buyer.objects.count()
-    # total_oder = Order.objects.count()
-    # orders = Order.objects.all().order_by('-id')
-    # context = {
-    #     'product': total_product,
-    #     'supplier': total_supplier,
-    #     'buyer': total_buyer,
-    #     'order': total_oder,
-    #     'orders': orders
-    # }
-    # return render(request, 'dashboard.html', context)
 
     return render(request, 'dashboard.html', context)
 

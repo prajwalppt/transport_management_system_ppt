@@ -7,7 +7,7 @@ class Driver(models.Model):
     liscence_no = models.CharField(max_length=50)
     liscence_expiry_date = models.DateField()
     joining_date = models.DateField()
-    remarks = models.CharField(max_length=220)
+    remarks = models.CharField(max_length=220, blank=True,null=True)
     created_date = models.DateField(auto_now_add=True)
 
     def __str__(self):

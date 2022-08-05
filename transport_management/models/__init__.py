@@ -6,3 +6,4 @@ from .product import Product
 from .booking import Booking
 from .expense import Expense
 from .pod import Pod
+from .payment import Payment

@@ -4,7 +4,7 @@ from django import forms
 from django.forms import ModelForm
 # from matplotlib.pyplot import cla
 
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Booking, Expense, Pod
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Booking, Expense, Pod, Payment
 
 
 #clientform
@@ -242,7 +242,18 @@ class BookingUpdateForm(forms.ModelForm):
                 'class': 'form-control', 'id': 'status'
             }),
         }
-
+    def __init__(self, *args, **kwargs):
+        super(BookingUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['client'].disabled = True
+        self.fields['vehicle'].disabled = True
+        self.fields['product'].disabled = True
+        self.fields['no_of_product'].disabled = True
+        self.fields['driver'].disabled = True
+        self.fields['freight_amount'].disabled = True
+        self.fields['loading_date'].disabled = True
+        self.fields['weight_in_tons'].disabled = True
+        self.fields['location_from'].disabled = True
+        self.fields['location_to'].disabled = True
 
 #expenseform
 class ExpenseForm(forms.ModelForm):
@@ -255,7 +266,7 @@ class ExpenseForm(forms.ModelForm):
                 'class': 'form-control', 'id': 'booking_no'
             }),
             'diesel': forms.NumberInput(attrs={
-                'class': 'form-control datetimepicker-input', 'id': 'diesel'
+                'class': 'form-control', 'id': 'diesel'
             }),
             'fastag': forms.NumberInput(attrs={
                 'class': 'form-control', 'id': 'fastag'
@@ -296,6 +307,30 @@ class PodForm(forms.ModelForm):
             }),
             'remarks': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'remarks'
+            }),           
+        }
+
+#paymentform
+class PaymentForm(forms.ModelForm):
+    class Meta:
+        model = Payment
+        fields = ['booking_no','amount','mode','transaction_no','payment_date']
+
+        widgets = {
+            'booking_no': forms.Select(attrs={
+                'class': 'form-control', 'id': 'booking_no'
+            }),
+            'amount': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'amount'
+            }),
+            'mode': forms.Select(attrs={
+                'class': 'form-control', 'id': 'mode'
+            }),
+            'transaction_no': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'transaction_no'
+            }),
+            'payment_date': forms.DateInput(attrs={
+                'class': 'form-control', 'id': 'datepicker1'
             }),           
         }
 

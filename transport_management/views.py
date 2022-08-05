@@ -9,42 +9,23 @@ from django import forms
 
 from users.models import User
 
-from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod
+from .models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod, Payment
 
-from .forms import (ClientForm, VehicleForm, VehicleMaintananceForm, DriverForm, ProductForm, BookingForm, BookingUpdateForm, ExpenseForm, PodForm)
+from .forms import (
+    ClientForm,
+    VehicleForm,
+    VehicleMaintananceForm,
+    DriverForm,
+    ProductForm,
+    BookingForm,
+    BookingUpdateForm,
+    ExpenseForm,
+    PodForm,
+    PaymentForm
+
+    )
 
 
-# from users.models import User
-# from .models import (
-#     Booking,
-#     Supplier,
-#     Buyer,
-#     Season,
-#     Drop,
-#     Product,
-#     Order,
-#     Delivery,
-#     Vehical,
-#     Driver,
-#     Goods,
-#     VehicleMaintanance
-# )
-# from .forms import (
-#     BookingForm,
-#     BookingUpdateForm,
-#     SupplierForm,
-#     BuyerForm,
-#     SeasonForm,
-#     DriverForm,
-#     DropForm,
-#     ProductForm,
-#     OrderForm,
-#     DeliveryForm,
-#     VehicalForm,
-#     GoodsForm,
-#     VehicleMaintenaceForm,
-#     SupplierFormUpdate
-# )
 
 
 # Client views
@@ -247,6 +228,21 @@ class PodListView(ListView):
     template_name = 'transport_management/pod_list.html'
     context_object_name = 'pod'
 
+#Payment views
+@login_required(login_url='login')
+def create_payment(request):
+    forms = PaymentForm()
+    if request.method == 'POST':
+        forms = PaymentForm(request.POST)
+        if forms.is_valid():
+            forms.save()
+            return redirect('payment-list')
+    return render(request, 'transport_management/create_payment.html', {'form': forms })
+
+class PaymentListView(ListView):
+    model = Payment
+    template_name = 'transport_management/payment_list.html'
+    context_object_name = 'payment'
 
 # @login_required(login_url='login')
 # def delete_supplier(request,id):
