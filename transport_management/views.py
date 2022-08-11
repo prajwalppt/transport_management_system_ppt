@@ -5,6 +5,7 @@ from django.shortcuts import render, redirect
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django import forms
+from django.contrib import messages
 # Create your views here.
 
 from users.models import User
@@ -41,7 +42,7 @@ def create_client(request):
             email = forms.cleaned_data['email']
             phone_number = forms.cleaned_data['phone_number']
             Client.objects.create(name=name, address=address, email=email, phone_number=phone_number)
-        
+            messages.success(request, 'Client added succesfully')
             return redirect('client-list')
     context = {
         'form': forms
@@ -70,6 +71,7 @@ def create_vehicle(request):
                 permit_tax_valid_till=forms.cleaned_data['permit_tax_valid_till'],
                 fitness_valid_till=forms.cleaned_data['fitness_valid_till'],
             )
+            messages.success(request, 'Vehicle added succesfully')
             return redirect('vehicle-list')
     context = {
         'form': forms
@@ -91,6 +93,7 @@ def create_vehiclemaintanance(request):
         forms = VehicleMaintananceForm(request.POST)
         if forms.is_valid():
             forms.save()
+            messages.success(request, 'Vehiclemaintanance record added succesfully')
             return redirect('vehiclemaintanance-list')
     context = {
         'form': forms
@@ -125,6 +128,7 @@ def create_driver(request):
                 joining_date=forms.cleaned_data['joining_date'],
                 remarks =forms.cleaned_data['remarks']
             )
+            messages.success(request, 'Driver added succesfully')
             return redirect('driver-list')
     context = {
         'form': forms
@@ -149,6 +153,7 @@ def create_product(request):
                 weight_in_kg =forms.cleaned_data['weight_in_kg'],
                 rate =forms.cleaned_data['rate']
             )
+            messages.success(request, 'Product added succesfully')
             return redirect('product-list')
     context = {
         'form': forms
@@ -169,6 +174,7 @@ def create_booking(request):
         forms = BookingForm(request.POST)
         if forms.is_valid():
             forms.save()
+            messages.success(request, 'Booking created succesfully')
             return redirect('booking-list')
     return render(request, 'transport_management/create_booking.html', {'form': forms })
 
@@ -189,10 +195,12 @@ def update_booking(request,id):
 
     if request.method == 'POST':
         BookingUpdateForm(request.POST,instance=data).save()
+        messages.success(request, 'Booking status updated succesfully')
         return redirect('booking-list')
     else:
         form = BookingUpdateForm(instance=data)
         context = { 'form': form }
+        # messages.success(request, 'Booking status updated succesfully')
         return render(request, 'transport_management/update_booking.html', context)
 
 
@@ -204,6 +212,7 @@ def create_expense(request):
         forms = ExpenseForm(request.POST)
         if forms.is_valid():
             forms.save()
+            messages.success(request, 'Expense record added succesfully')
             return redirect('expense-list')
     return render(request, 'transport_management/create_expense.html', {'form': forms })
 
@@ -220,6 +229,7 @@ def create_pod(request):
         forms = PodForm(request.POST)
         if forms.is_valid():
             forms.save()
+            messages.success(request, 'POD record added succesfully')
             return redirect('pod-list')
     return render(request, 'transport_management/create_pod.html', {'form': forms })
 
@@ -227,6 +237,25 @@ class PodListView(ListView):
     model = Pod
     template_name = 'transport_management/pod_list.html'
     context_object_name = 'pod'
+
+# class PodObtainedListView(ListView):
+#     model = Pod
+#     total_pod = Pod.objects.filter(received='yes')
+#     template_name = 'transport_management/pod_list.html'
+#     context_object_name = 'podobtained'
+
+
+# class PodFilterView(ListView):
+#     received_query = request.GET.get('received')
+#     print(received)
+    # def pod_received(request):
+    #     received_pod = Pod.objects.filter(received='yes')
+    
+    #     print(pod_received)
+    #     context = {
+    #     'received': pod_received
+    #         }
+
 
 #Payment views
 @login_required(login_url='login')
@@ -236,6 +265,7 @@ def create_payment(request):
         forms = PaymentForm(request.POST)
         if forms.is_valid():
             forms.save()
+            messages.success(request, 'Payment record added succesfully')
             return redirect('payment-list')
     return render(request, 'transport_management/create_payment.html', {'form': forms })
 
@@ -243,6 +273,19 @@ class PaymentListView(ListView):
     model = Payment
     template_name = 'transport_management/payment_list.html'
     context_object_name = 'payment'
+
+
+
+# #Invoice views
+# @login_required(login_url='login')
+# def create_invoice(request):
+#     forms = PaymentForm()
+#     if request.method == 'POST':
+#         forms = PaymentForm(request.POST)
+#         if forms.is_valid():
+#             forms.save()
+#             return redirect('payment-list')
+#     return render(request, 'transport_management/create_payment.html', {'form': forms })
 
 # @login_required(login_url='login')
 # def delete_supplier(request,id):
