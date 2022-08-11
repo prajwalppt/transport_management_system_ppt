@@ -37,11 +37,18 @@
                 <h4 class="box-title">Booking List </h4>
             </div>
             <div class="card-body--">
-                <div class="table-stats booking-table ov-h">
+                {% for msg in messages %}
+                    <div class="col-xl-12"><div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                <div class="table-stats order-table ov-h">
                     <table class="table ">
                         <thead>
                             <tr>
-
                                 <th class="serial">#</th>
                                 <th>Bilty No</th>
                                 <th>Client</th>
@@ -55,7 +62,6 @@
                                 <th>Freight Amount</th>
                                 <th>Status</th>
                                 <th>Action</th>
-
                             </tr>
                         </thead>
                         <tbody>
@@ -94,7 +100,7 @@
                             </tr>
                             {% endfor %}
                             {% else %}
-                                <tr><td>No booking Data</td></tr>
+                                <tr><td>No Booking Data</td></tr>
                             {% endif %}
                         </tbody>
                     </table>

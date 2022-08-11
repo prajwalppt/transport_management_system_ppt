@@ -37,6 +37,14 @@
                 <h4 class="box-title">Client List </h4>
             </div>
             <div class="card-body--">
+                {% for msg in messages %}
+                    <div class="col-xl-12"><div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
                 <div class="table-stats order-table ov-h">
                     <table class="table ">
                         <thead>
@@ -47,7 +55,7 @@
                                 <th>Email</th>
                                 <th>Address</th>
                                 <th>Date</th>
-                                <th>Action</th>
+                                {% comment %} <th>Action</th> {% endcomment %}
                             </tr>
                         </thead>
                         <tbody>
@@ -60,10 +68,10 @@
                                 <td>{{ client.email }}</td>
                                 <td>{{ client.address }}</td>
                                 <td>{{ client.created_date }}</td>
-                                <td>
-                                    {% comment %} <a href="{% url 'client-delete' client.id %}" class="btn btn-sm btn-danger">Delete</a>  {% endcomment %}
-                                    {% comment %} <a href="{% url 'update-client' client.id %}" class="btn btn-sm btn-warning">Edit</a> {% endcomment %}
-                                </td>
+                                {% comment %} <td>
+                                    <a href="{% url 'client-delete' client.id %}" class="btn btn-sm btn-danger">Delete</a> 
+                                    <a href="{% url 'update-client' client.id %}" class="btn btn-sm btn-warning">Edit</a>
+                                </td> {% endcomment %}
                             </tr>
                             {% endfor %}
                             {% else %}

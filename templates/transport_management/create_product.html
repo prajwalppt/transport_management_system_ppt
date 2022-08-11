@@ -41,6 +41,7 @@
                 <div id="pay-invoice">
                     <div class="card-body">
                         <form action="#" method="post" novalidate="novalidate">
+                            <div>
                             {% csrf_token %}
                             {{form}}
                             {% comment %} <div class="form-group">

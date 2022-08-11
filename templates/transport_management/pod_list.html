@@ -37,6 +37,14 @@
                 <h4 class="box-title">POD List </h4>
             </div>
             <div class="card-body--">
+                {% for msg in messages %}
+                    <div class="col-xl-12"><div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
                 <div class="table-stats order-table ov-h">
                     <table class="table ">
                         <thead>
@@ -61,6 +69,19 @@
                                 <td>{{ pod.aknowledgement }}</td>
                                 <td>{{ pod.remarks }}</td>
                                 <td>{{ pod.created_date }}</td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr><td>No POD Data</td></tr>
+                            {% endif %}
+                        </tbody>
+                        <tbody>
+                            {% if pod %}
+                            {% for pod in pod %}
+                            <tr>
+                                <td class="serial">{{ forloop.counter }}</td>
+                                <td>{{ received }}</td>
+                                
                             </tr>
                             {% endfor %}
                             {% else %}
