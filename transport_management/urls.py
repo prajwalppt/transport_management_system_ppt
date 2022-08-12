@@ -13,6 +13,9 @@ from .views import (
     create_expense,
     create_pod,
     create_payment,
+    update_pod,
+    
+  
 
 
     ClientListView,
@@ -24,6 +27,11 @@ from .views import (
     ExpenseListView,
     PodListView,
     PaymentListView,
+    PodReceivedListView,
+    PodNotReceivedListView,
+    AkNotOkListView,
+    AkOkListView,
+    
 
 
 )
@@ -46,39 +54,13 @@ urlpatterns = [
     path('create-expense/', create_expense, name='create-expense'),
     path('expense-list/', ExpenseListView.as_view(), name='expense-list'),
     path('create-pod/', create_pod, name='create-pod'),
+    path('update-pod/<int:id>/', update_pod, name='update-pod'),
     path('pod-list/', PodListView.as_view(), name='pod-list'),
+    path('pod-received-list/', PodReceivedListView.as_view(), name='pod-received-list'),
+    path('pod-not-received-list/', PodNotReceivedListView.as_view(), name='pod-not-received-list'),
+    path('ak-notok-list/', AkNotOkListView.as_view(), name='ak-notok-list'),
+    path('ak-ok-list/', AkOkListView.as_view(), name='ak-ok-list'),
     path('create-payment/', create_payment, name='create-payment'),
     path('payment-list/', PaymentListView.as_view(), name='payment-list'),
 ]
 
-
-# urlpatterns = [
-#     path('create-supplier/', create_supplier, name='create-supplier'),
-#     path('supplier-list/', SupplierListView.as_view(), name='supplier-list'),
-#     path('supplier-delete/<int:id>/', delete_supplier, name='supplier-delete'),
-#     path('supplier-update/<int:id>/', update_supplier, name='update-supplier'),
-
-
-
-#     path('create-buyer/', create_buyer, name='create-buyer'),
-#     path('create-season/', create_season, name='create-season'),
-#     path('create-drop/', create_drop, name='create-drop'),
-#     path('create-product/', create_product, name='create-product'),
-
-#     path('create-order/', create_order, name='create-order'),
-#     path('order-list/', OrderListView.as_view(), name='order-list'),
-#     path('order-update/<int:id>/', order_update, name='order-update'),
-
-
-
-#     path('create-delivery/', create_delivery, name='create-delivery'),
-
-#     path('buyer-list/', BuyerListView.as_view(), name='buyer-list'),
-#     path('season-list/', SeasonListView.as_view(), name='season-list'),
-#     path('drop-list/', DropListView.as_view(), name='drop-list'),
-
-#     path('product-list/', ProductListView.as_view(), name='product-list'),
-
-    
-#     path('delivery-list/', DeliveryListView.as_view(), name='delivery-list'),
-# ]

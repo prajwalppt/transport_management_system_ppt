@@ -1,14 +1,15 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.db.models import Avg, Max, Min, Sum
+from django.contrib import messages
 
 # from transport_management.models import Product, Supplier, Buyer, Order
 from transport_management.models import Client, Vehicle, VehicleMaintanance, Driver, Product, Booking, Expense, Pod, Payment
 
-def total_expense(self):
-    total = Expense.objects.aggregate(TOTAL = Sum('diesel'))['TOTAL']
-    print(total)
-    return total
+# def total_expense(self):
+#     total = Expense.objects.aggregate(TOTAL = Sum('diesel'))['TOTAL']
+#     print(total)
+#     return total
 @login_required(login_url='login')
 def dashboard(request):
 
@@ -24,7 +25,9 @@ def dashboard(request):
     print(total_expense)
     bookings = Booking.objects.all().order_by('-id')
     total_pod = Pod.objects.filter(received='yes').count()
+    total_pod_no = Pod.objects.filter(received='no').count()
     total_aknowledgement = Pod.objects.filter(aknowledgement='not ok').count()
+    total_aknowledgement_ok = Pod.objects.filter(aknowledgement='ok').count()
     total_payment = Payment.objects.aggregate(total = Sum('amount'))['total']
 
 
@@ -38,7 +41,9 @@ def dashboard(request):
         'bookings': bookings,
         'expenses': total_expense,
         'pod': total_pod,
+        'podno': total_pod_no,
         'aknowledgement': total_aknowledgement,
+        'aknowledgementok': total_aknowledgement_ok,
         'payment': total_payment,
         
 

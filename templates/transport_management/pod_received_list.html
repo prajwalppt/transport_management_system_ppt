@@ -34,7 +34,7 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="box-title">POD List </h4>
+                <h4 class="box-title">POD Received List </h4>
             </div>
             <div class="card-body--">
                 {% for msg in messages %}
@@ -56,23 +56,19 @@
                                 <th>Aknowledgement</th>
                                 <th>Remarks</th>
                                 <th>Created Date</th>
-                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if pod %}
-                            {% for pod in pod %}
+                            {% if podreceived %}
+                            {% for podreceived in podreceived %}
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
-                                <td>{{ pod.booking_no }}</td>
-                                <td>{{ pod.received }}</td>
-                                <td>{{ pod.received_date }}</td>
-                                <td>{{ pod.aknowledgement }}</td>
-                                <td>{{ pod.remarks }}</td>
-                                <td>{{ pod.created_date }}</td>
-                                <td>
-                                    <a href="{% url 'update-pod' pod.id %}" class=" btn-sm btn-primary">Edit</a>
-                                </td>
+                                <td>{{ podreceived.booking_no }}</td>
+                                <td>{{ podreceived.received }}</td>
+                                <td>{{ podreceived.received_date }}</td>
+                                <td>{{ podreceived.aknowledgement }}</td>
+                                <td>{{ podreceived.remarks }}</td>
+                                <td>{{ podreceived.created_date }}</td>
                             </tr>
                             {% endfor %}
                             {% else %}
@@ -80,8 +76,8 @@
                             {% endif %}
                         </tbody>
                         {% comment %} <tbody>
-                            {% if pod %}
-                            {% for pod in pod %}
+                            {% if podreceived %}
+                            {% for podreceived in podreceived %}
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
                                 <td>{{ received }}</td>

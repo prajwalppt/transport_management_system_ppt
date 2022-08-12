@@ -200,6 +200,9 @@ class BookingForm(forms.ModelForm):
             }),
         }
 
+    def multiply_two_integers(rate, no_of_product):
+        freight_amount = rate*no_of_product
+        return freight_amount
 
 #bookingupdate
 class BookingUpdateForm(forms.ModelForm):
@@ -309,6 +312,35 @@ class PodForm(forms.ModelForm):
                 'class': 'form-control', 'id': 'remarks'
             }),           
         }
+
+
+class PodUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Pod
+        fields = ['booking_no','received','received_date','aknowledgement','remarks']
+
+        widgets = {
+            'booking_no': forms.Select(attrs={
+                'class': 'form-control', 'id': 'booking_no'
+            }),
+            'received': forms.Select(attrs={
+                'class': 'form-control', 'id': 'received'
+            }),
+            'received_date': forms.DateInput(attrs={
+                'class': 'form-control', 'id': 'datepicker1'
+            }),
+            'aknowledgement': forms.Select(attrs={
+                'class': 'form-control', 'id': 'aknowledgement'
+            }),
+            'remarks': forms.TextInput(attrs={
+                'class': 'form-control', 'id': 'remarks'
+            }),           
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(PodUpdateForm, self).__init__(*args, **kwargs)
+        self.fields['booking_no'].disabled = True
+        
 
 #paymentform
 class PaymentForm(forms.ModelForm):

@@ -22,6 +22,7 @@ from .forms import (
     BookingUpdateForm,
     ExpenseForm,
     PodForm,
+    PodUpdateForm,
     PaymentForm
 
     )
@@ -188,7 +189,7 @@ class BookingListView(ListView):
         context['booking'] = Booking.objects.all().order_by('-id')
         return context
 
-
+#bookingupdate
 @login_required(login_url='login')
 def update_booking(request,id):
     data = Booking.objects.get(pk=id)
@@ -233,16 +234,72 @@ def create_pod(request):
             return redirect('pod-list')
     return render(request, 'transport_management/create_pod.html', {'form': forms })
 
+
+#podupdate
+@login_required(login_url='login')
+def update_pod(request,id):
+    data = Pod.objects.get(pk=id)
+
+    if request.method == 'POST':
+        PodUpdateForm(request.POST,instance=data).save()
+        messages.success(request, 'Pod status updated succesfully')
+        return redirect('pod-list')
+    else:
+        form = PodUpdateForm(instance=data)
+        context = { 'form': form }
+        # messages.success(request, 'Booking status updated succesfully')
+        return render(request, 'transport_management/update_pod.html', context)
+
+
 class PodListView(ListView):
     model = Pod
+    total_received_pod = Pod.objects.filter(received='yes')
     template_name = 'transport_management/pod_list.html'
     context_object_name = 'pod'
 
-# class PodObtainedListView(ListView):
-#     model = Pod
-#     total_pod = Pod.objects.filter(received='yes')
-#     template_name = 'transport_management/pod_list.html'
-#     context_object_name = 'podobtained'
+ #Podreceivedview   
+class PodReceivedListView(ListView):
+    model = Pod
+    template_name = 'transport_management/pod_received_list.html'
+    context_object_name = 'podreceived'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["podreceived"] = Pod.objects.filter(received='yes')
+        return context
+
+ #Podnotreceived   
+class PodNotReceivedListView(ListView):
+    model = Pod
+    template_name = 'transport_management/pod_not_received_list.html'
+    context_object_name = 'podnotreceived'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["podnotreceived"] = Pod.objects.filter(received='no')
+        return context
+
+
+class AkNotOkListView(ListView):
+    model = Pod
+    template_name = 'transport_management/ak_notok_list.html'
+    context_object_name = 'aknotok'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["aknotok"] = Pod.objects.filter(aknowledgement='not ok')
+        return context
+
+
+class AkOkListView(ListView):
+    model = Pod
+    template_name = 'transport_management/ak_ok_list.html'
+    context_object_name = 'akok'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["akok"] = Pod.objects.filter(aknowledgement='ok')
+        return context
 
 
 # class PodFilterView(ListView):
@@ -275,7 +332,6 @@ class PaymentListView(ListView):
     context_object_name = 'payment'
 
 
-
 # #Invoice views
 # @login_required(login_url='login')
 # def create_invoice(request):
@@ -286,145 +342,3 @@ class PaymentListView(ListView):
 #             forms.save()
 #             return redirect('payment-list')
 #     return render(request, 'transport_management/create_payment.html', {'form': forms })
-
-# @login_required(login_url='login')
-# def delete_supplier(request,id):
-#     print(id,request.method)
-#     supplier = Supplier.objects.get(pk=id)
-#     supplier.delete()
-#     return redirect('supplier-list')
-
-# @login_required(login_url='login')
-# def update_supplier(request,id):
-#     data = Supplier.objects.get(pk=id)
-#     if request.method == 'POST':
-#         SupplierFormUpdate(request.POST,instance=data).save()
-#         return redirect('supplier-list')
-#     else:
-#         form = SupplierFormUpdate(instance=data)
-#         context = { 'form': form }
-#         return render(request, 'store/update_supplier.html', context)
-
-
-# # # Season views
-# # @login_required(login_url='login')
-# # def create_season(request):
-# #     forms = DriverForm()
-# #     if request.method == 'POST':
-# #         forms = DriverForm(request.POST)
-# #         if forms.is_valid():
-# #             forms.save()
-# #             return redirect('season-list')
-# #     context = {
-# #         'form': forms
-# #     }
-# #     return render(request, 'store/create_season.html', context)
-
-# # Driver views
-# @login_required(login_url='login')
-# def create_season(request):
-#     forms = DriverForm()
-#     if request.method == 'POST':
-#         forms = DriverForm(request.POST)
-#         if forms.is_valid():
-#             Driver.objects.create(
-#                 name =forms.cleaned_data['name'],
-#                 phone_number=forms.cleaned_data['phone_number'],
-#                 liscence_no=forms.cleaned_data['liscence_no'],
-#                 liscence_expiry_date=forms.cleaned_data['liscence_expiry_date'],
-#                 aadhar_card_no=forms.cleaned_data['aadhar_card_no'],
-#                 joining_date=forms.cleaned_data['joining_date'],
-#             )
-#             return redirect('season-list')
-#     context = {
-#         'form': forms
-#     }
-#     return render(request, 'store/create_season.html', context)
-
-# class SeasonListView(ListView):
-#     model = Driver
-#     template_name = 'store/season_list.html'
-#     context_object_name = 'driver'
-
-
-# # Drop views
-# # @login_required(login_url='login')
-# # def create_drop(request):
-# #     forms = DropForm()
-# #     if request.method == 'POST':
-# #         forms = DropForm(request.POST)
-# #         if forms.is_valid():
-# #             forms.save()
-# #             return redirect('drop-list')
-# #     context = {
-# #         'form': forms
-# #     }
-# #     return render(request, 'store/create_drop.html', context)
-
-
-
-
-# # Order views
-# @login_required(login_url='login')
-# def create_order(request):
-#     forms = BookingForm()
-#     if request.method == 'POST':
-#         forms = BookingForm(request.POST)
-#         if forms.is_valid():
-#             forms.save()
-#             return redirect('order-list')
-#     return render(request, 'store/create_order.html', {'form': forms })
-
-
-# class OrderListView(ListView):
-#     model = Booking
-#     template_name = 'store/order_list.html'
-
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['booking'] = Booking.objects.all().order_by('-id')
-#         return context
-
-# # def update_supplier(request,id):
-# #     data = Supplier.objects.get(pk=id)
-#     # if request.method == 'POST':
-#     #     SupplierFormUpdate(request.POST,instance=data).save()
-#     #     return redirect('supplier-list')
-#     # else:
-#     #     form = SupplierFormUpdate(instance=data)
-#     #     context = { 'form': form }
-#     #     return render(request, 'store/update_supplier.html', context)
-
-# @login_required(login_url='login')
-# def order_update(request,id):
-#     data = Booking.objects.get(pk=id)
-
-#     if request.method == 'POST':
-#         BookingUpdateForm(request.POST,instance=data).save()
-#         return redirect('order-list')
-#     else:
-#         form = BookingUpdateForm(instance=data)
-#         context = { 'form': form }
-#         return render(request, 'store/order_update.html', context)
-
-    
-
-# # Delivery views
-# @login_required(login_url='login')
-# def create_delivery(request):
-#     forms = DeliveryForm()
-#     if request.method == 'POST':
-#         forms = DeliveryForm(request.POST)
-#         if forms.is_valid():
-#             forms.save()
-#             return redirect('delivery-list')
-#     context = {
-#         'form': forms
-#     }
-#     return render(request, 'store/create_delivery.html', context)
-
-
-# class DeliveryListView(ListView):
-#     model = Delivery
-#     template_name = 'store/delivery_list.html'
-#     context_object_name = 'delivery'

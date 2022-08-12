@@ -11,7 +11,7 @@ class VehicleAdmin(admin.ModelAdmin):
     list_display = ['registration_no', 'owner_name', 'manufacture_company', 'insurance_valid_till', 'permit_tax_valid_till', 'fitness_valid_till']
 
 class VehicleMaintananceAdmin(admin.ModelAdmin):
-    list_display = ['vehicle_no', 'date_of_initialization', 'odometer_reading', 'oil_changed', 'spare_parts_replaced', 'total_cost_of_maintenance']
+    list_display = ['vehicle_no', 'under_maintanance', 'date_of_initialization', 'odometer_reading', 'oil_changed', 'spare_parts_replaced', 'total_cost_of_maintenance']
 
 class DriverAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone_number','aadhar_card_no', 'liscence_no', 'liscence_expiry_date', 'joining_date', 'remarks']

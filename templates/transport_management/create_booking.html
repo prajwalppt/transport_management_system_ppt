@@ -42,36 +42,52 @@
                     <div class="card-body">
                         <form action="#" method="post" novalidate="novalidate">
                             {% csrf_token %}
-                            {{form}}
-                            <!-- <div class="form-group">
-                                <label for="supplier" class="control-label mb-1">Client</label>
-                                {{ form.supplier }}
+                            {% comment %} {{form}} {% endcomment %}
+                             <div class="form-group">
+                                <label for="client" class="control-label mb-1">Client</label>
+                                {{ form.client }}
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicle" class="control-label mb-1">Vehicle</label>
+                                {{ form.vehicle }}
+                            </div>
+                            <div class="form-group">
+                                <label for="driver" class="control-label mb-1">Driver</label>
+                                {{ form.driver }}
                             </div>
                             <div class="form-group">
                                 <label for="product" class="control-label mb-1">Product</label>
                                 {{ form.product }}
                             </div>
                             <div class="form-group">
-                                <label for="buyer" class="control-label mb-1">Vehicle</label>
-                                {{ form.buyer }}
+                                <label for="no_of_product" class="control-label mb-1">No of Products</label>
+                                {{ form.no_of_product }}
                             </div>
                             <div class="form-group">
-                                <label for="season" class="control-label mb-1">Driver</label>
-                                {{ form.season }}
+                                <label for="weight_in_tons" class="control-label mb-1">Weight</label>
+                                {{ form.weight_in_tons }}
+                            </div>
+                            <div class="form-group">
+                                <label for="freight_amount" class="control-label mb-1">Frieght Amount</label>
+                                {{ form.freight_amount }}
+                            </div>
+                            <div class="form-group">
+                                <label for="loading_date" class="control-label mb-1">Loading Date</label>
+                                {{ form.loading_date }}
+                            </div>
+                            <div class="form-group">
+                                <label for="location_from" class="control-label mb-1">From Location</label>
+                                {{ form.location_from }}
+                            </div>
+                            <div class="form-group">
+                                <label for="location_to" class="control-label mb-1">To Location</label>
+                                {{ form.location_to }}
                             </div>
                             {% comment %} <div class="form-group">
-                                <label for="drop" class="control-label mb-1">Drop</label>
-                                {{ form.drop }}
+                                <label for="status" class="control-label mb-1">Status</label>
+                                {{ form.status }}
                             </div> {% endcomment %}
-                            <div class="form-group">
-                                <label for="design" class="control-label mb-1">Frieght Amount</label>
-                                {{ form.design }}
-                            </div>
-                            <div class="form-group">
-                                <label for="color" class="control-label mb-1">Advance Paid amount</label>
-                                {{ form.color }}
-                            </div> -->
-                            <br>
+                            
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                     <span id="payment-button-amount">Create Booking</span>
