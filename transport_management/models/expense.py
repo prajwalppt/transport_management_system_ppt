@@ -5,11 +5,11 @@ from .import Booking
 class Expense(models.Model):
 
     booking_no = models.ForeignKey(Booking,on_delete=models.CASCADE)
-    diesel = models.IntegerField(blank=True,null=True)
-    fastag = models.IntegerField(blank=True,null=True)
-    driver_expense = models.IntegerField(blank=True,null=True)
-    uncertainty = models.IntegerField(blank=True,null=True)
-    miscellaneous = models.IntegerField(blank=True,null=True)
+    diesel = models.IntegerField(blank=True,null=True, default=0)
+    fastag = models.IntegerField(blank=True,null=True, default=0)
+    driver_expense = models.IntegerField(blank=True,null=True, default=0)
+    uncertainty = models.IntegerField(blank=True,null=True, default=0)
+    miscellaneous = models.IntegerField(blank=True,null=True, default=0)
     expense_date = models.DateField()
     created_date = models.DateField(auto_now_add=True)
 

@@ -1,6 +1,6 @@
 from django.urls import path
 from django.conf.urls import include
-
+from . import views
 
 from .views import (
     create_client,
@@ -14,7 +14,7 @@ from .views import (
     create_pod,
     create_payment,
     update_pod,
-    
+    create_invoice,
   
 
 
@@ -31,6 +31,7 @@ from .views import (
     PodNotReceivedListView,
     AkNotOkListView,
     AkOkListView,
+    VehicleUnderMaintananceListView,
     
 
 
@@ -44,6 +45,7 @@ urlpatterns = [
     path('vehicle-list/', VehicleListView.as_view(), name='vehicle-list'),
     path('create-vehiclemaintanance/', create_vehiclemaintanance, name='create-vehiclemaintanance'),
     path('vehiclemaintanance-list/', VehicleMaintananceListView.as_view(), name='vehiclemaintanance-list'),
+    path('vehicle-under-maintanance-list/', VehicleUnderMaintananceListView.as_view(), name='vehicle-under-maintanance-list'),
     path('create-driver/', create_driver, name='create-driver'),
     path('driver-list/', DriverListView.as_view(), name='driver-list'),
     path('create-product/', create_product, name='create-product'),
@@ -62,5 +64,7 @@ urlpatterns = [
     path('ak-ok-list/', AkOkListView.as_view(), name='ak-ok-list'),
     path('create-payment/', create_payment, name='create-payment'),
     path('payment-list/', PaymentListView.as_view(), name='payment-list'),
+    path('invoice/', create_invoice, name='invoice'),
+    path('',views.amount)
 ]
 

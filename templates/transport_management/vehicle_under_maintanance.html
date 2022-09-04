@@ -1,0 +1,103 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Vehicle Under Maintanance List{% endblock title %}
+
+{% block breadcrumbs %}
+<div class="breadcrumbs">
+    <div class="breadcrumbs-inner">
+        <div class="row m-0">
+            <div class="col-sm-4">
+                <div class="page-header float-left">
+                    <div class="page-title">
+                        <h1>Dashboard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-8">
+                <div class="page-header float-right">
+                    <div class="page-title">
+                        <ol class="breadcrumb text-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Vehicle Maintanance</a></li>
+                            <li class="active">List</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+<div class="row">
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="box-title">Vehicle Under Maintanance List </h4>
+            </div>
+            <div class="card-body--">
+                {% for msg in messages %}
+                    <div class="col-xl-12"><div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
+                <div class="table-stats vehicleundermaintanance-table ov-h">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th class="serial">#</th>
+                                <th>Vehicle No.</th>
+                                <th>Currently Under Maintenance</th>
+                                <th>Odometer Reading</th>
+                                <th>oil changed</th>
+                                <th>Spare parts replaced</th>
+                                <th>Total cost of maintenance(₹)</th>
+                                <th>Date of initialization</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if vehicleundermaintanance %}
+                            {% for vehicleundermaintanance in vehicleundermaintanance %}
+                            <tr>
+                                <td class="serial">{{ forloop.counter }}</td>
+                                <td>{{ vehicleundermaintanance.vehicle_no }}</td>
+                                <td>{{ vehicleundermaintanance.under_maintanance }}</td>
+                                <td>{{ vehicleundermaintanance.odometer_reading }}</td>
+                                <td>{{ vehicleundermaintanance.oil_changed }}</td>
+                                <td>{{ vehicleundermaintanance.spare_parts_replaced }}</td>
+                                <td>{{ vehicleundermaintanance.total_cost_of_maintenance }}</td>
+                                <td>{{ vehicleundermaintanance.date_of_initialization }}</td>
+                                <!-- <td>
+                                    {% if vehicleundermaintanance.status == 'pending' %}
+                                        <a class="btn btn-warning" href="">{{ vehicleundermaintanance.status }}</a>
+                                    {% elif vehicleundermaintanance.status == 'decline' %}
+                                        <a class="btn btn-danger" href="">{{ vehicleundermaintanance.status }}</a>
+                                    {% elif vehicleundermaintanance.status == 'complete' %}
+                                        <a class="btn btn-success" href="">{{ vehicleundermaintanance.status }}</a>
+                                    {% elif vehicleundermaintanance.status == 'approved' %}
+                                        <a class="btn btn-primary" href="">{{ vehicleundermaintanance.status }}</a>
+                                    {% elif vehicleundermaintanance.status == 'bulk' %}
+                                        <a class="btn btn-secondary" href="">{{ vehicleundermaintanance.status }}</a>
+                                    {% else %}
+                                        <a class="btn btn-info" href="">{{ vehicleundermaintanance.status }}</a>
+                                    {% endif %}
+                                </td> -->
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr><td>No Vehicle Under Maintanance Data</td></tr>
+                            {% endif %}
+                        </tbody>
+                    </table>
+                </div> <!-- /.table-stats -->
+            </div>
+        </div> <!-- /.card -->
+    </div>  <!-- /.col-lg-8 -->
+
+    
+</div>
+{% endblock content %}

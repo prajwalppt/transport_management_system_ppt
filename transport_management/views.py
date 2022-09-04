@@ -6,6 +6,7 @@ from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
 from django import forms
 from django.contrib import messages
+from django.core.validators import validate_email
 # Create your views here.
 
 from users.models import User
@@ -28,7 +29,9 @@ from .forms import (
     )
 
 
-
+@login_required(login_url='login')
+def create_invoice(request):
+    return render(request, 'transport_management/invoice.html')
 
 # Client views
 @login_required(login_url='login')
@@ -44,7 +47,12 @@ def create_client(request):
             phone_number = forms.cleaned_data['phone_number']
             Client.objects.create(name=name, address=address, email=email, phone_number=phone_number)
             messages.success(request, 'Client added succesfully')
+            print(email)
             return redirect('client-list')
+            print(email)
+
+        else:
+            form = ClientForm()
     context = {
         'form': forms
     }
@@ -110,6 +118,17 @@ class VehicleMaintananceListView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['vehiclemaintanance'] = VehicleMaintanance.objects.all().order_by('-id')
+        return context
+
+#Vehicle_under_maintanance_views
+class VehicleUnderMaintananceListView(ListView):
+    model = VehicleMaintanance
+    template_name = 'transport_management/vehicle_under_maintanance.html'
+    context_object_name = 'vehicleundermaintanance'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["vehicleundermaintanance"] = VehicleMaintanance.objects.filter(under_maintanance ='yes')
         return context
 
 
@@ -179,6 +198,11 @@ def create_booking(request):
             return redirect('booking-list')
     return render(request, 'transport_management/create_booking.html', {'form': forms })
 
+
+
+def amount(request):
+    result = Product.objects.all()
+    return render(request, 'transport_management/create_booking.html', {'Product': result})
 
 class BookingListView(ListView):
     model = Booking
@@ -300,6 +324,8 @@ class AkOkListView(ListView):
         context = super().get_context_data(**kwargs)
         context["akok"] = Pod.objects.filter(aknowledgement='ok')
         return context
+
+
 
 
 # class PodFilterView(ListView):
