@@ -15,6 +15,7 @@ from .views import (
     create_payment,
     update_pod,
     create_invoice,
+    totexp,
   
 
 
@@ -24,6 +25,12 @@ from .views import (
     DriverListView,
     ProductListView,
     BookingListView,
+    BookingPendingListView,
+    BookingProcessingListView,
+    BookingCompleteListView,
+    BookingDeliveredListView,
+    BookingApprovedListView,
+    BookingDeclineListView,
     ExpenseListView,
     PodListView,
     PaymentListView,
@@ -32,6 +39,7 @@ from .views import (
     AkNotOkListView,
     AkOkListView,
     VehicleUnderMaintananceListView,
+    
     
 
 
@@ -53,6 +61,12 @@ urlpatterns = [
     path('create-booking/', create_booking, name='create-booking'),
     path('booking-list/', BookingListView.as_view(), name='booking-list'),
     path('update-booking/<int:id>/', update_booking, name='update-booking'),
+    path('booking-pending/', BookingPendingListView.as_view(), name='booking-pending'),
+    path('booking-processing/', BookingProcessingListView.as_view(), name='booking-processing'),
+    path('booking-complete/', BookingCompleteListView.as_view(), name='booking-complete'),
+    path('booking-delivered/', BookingDeliveredListView.as_view(), name='booking-delivered'),
+    path('booking-approved/', BookingApprovedListView.as_view(), name='booking-approved'),
+    path('booking-decline/', BookingDeclineListView.as_view(), name='booking-decline'),
     path('create-expense/', create_expense, name='create-expense'),
     path('expense-list/', ExpenseListView.as_view(), name='expense-list'),
     path('create-pod/', create_pod, name='create-pod'),
@@ -65,6 +79,8 @@ urlpatterns = [
     path('create-payment/', create_payment, name='create-payment'),
     path('payment-list/', PaymentListView.as_view(), name='payment-list'),
     path('invoice/', create_invoice, name='invoice'),
+
+    path('popup/', totexp, name='popup'),
     path('',views.amount)
 ]
 

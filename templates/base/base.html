@@ -326,5 +326,29 @@
         } );
         
         </script>
+
+        <script type="text/javascript">
+            function clicked() {
+               if (confirm('Do you want to submit?')) {
+                   yourformelement.submit();
+               } else {
+                   return false;
+               }
+            }
+        
+        </script>
+
+
+        <script>
+            $(document).ready(function(){
+                $('#rate').keyup(function(){
+                    alert("Hi");
+                }
+                
+                )
+            });
+        </script>
+
+       
 </body>
 </html>

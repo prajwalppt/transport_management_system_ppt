@@ -40,10 +40,11 @@
                 <!-- Credit Card -->
                 <div id="pay-invoice">
                     <div class="card-body">
-                        <form action="#" method="post" novalidate="novalidate">
+                        <form action="#" method="post" novalidate="novalidate" onsubmit="return confirm ('Are you sure? Data once submitted cannot be changed !!!')">
                             {% csrf_token %}
-                            {% comment %} {{form}} {% endcomment %}
-                             <div class="form-group">
+                            {{form}}
+                            <br>
+                             {% comment %} <div class="form-group">
                                 <label for="client" class="control-label mb-1">Client</label>
                                 {{ form.client }}
                             </div>
@@ -57,15 +58,21 @@
                             </div>
                             <div class="form-group">
                                 <label for="product" class="control-label mb-1">Product</label>
-                                {{ form.product }}
+                                {{ form.product }} 
+                                {% for product in product%}
+                                {{product.id}}
+                                {{product.name}}
+                                {{product.weight}}
+                                {{product.value}}
+                                {% endfor %} 
                             </div>                         
                             <div class="form-group">
                                 <label for="no_of_product" class="control-label mb-1">No of Products</label>
                                 {{ form.no_of_product }}
                             </div>
                             <div class="form-group">
-                                <label for="weight_in_tons" class="control-label mb-1">Weight</label>
-                                {{ form.weight_in_tons }}
+                                <label for="weight" class="control-label mb-1">Loaded Weight</label>
+                                {{ form.weight }}
                             </div>
                             <div class="form-group">
                                 <label for="freight_amount" class="control-label mb-1">Frieght Amount</label>
@@ -82,14 +89,14 @@
                             <div class="form-group">
                                 <label for="location_to" class="control-label mb-1">To Location</label>
                                 {{ form.location_to }}
-                            </div>
+                            </div> {% endcomment %}
                             {% comment %} <div class="form-group">
                                 <label for="status" class="control-label mb-1">Status</label>
                                 {{ form.status }}
                             </div> {% endcomment %}
                             
                             <div>
-                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
+                                <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block" onclick>
                                     <span id="payment-button-amount">Create Booking</span>
                                 </button>
                             </div>

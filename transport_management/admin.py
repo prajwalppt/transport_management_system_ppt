@@ -17,10 +17,10 @@ class DriverAdmin(admin.ModelAdmin):
     list_display = ['name', 'phone_number','aadhar_card_no', 'liscence_no', 'liscence_expiry_date', 'joining_date', 'remarks']
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ['name', 'weight_in_kg','rate']
+    list_display = ['name', 'weight','value']
 
 class BookingAdmin(admin.ModelAdmin):
-    list_display = ['client','vehicle','product','no_of_product','driver','loading_date','weight_in_tons','location_from','location_to','freight_amount']
+    list_display = ['client','vehicle','product','no_of_product','driver','loading_date','weight','location_from','location_to','freight_amount']
 
 class ExpenseAdmin(admin.ModelAdmin):
     list_display = ['booking_no','diesel','fastag','driver_expense','uncertainty','miscellaneous']

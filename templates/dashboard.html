@@ -11,7 +11,7 @@
 {% comment %} booking {% endcomment %}
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"><a href="{% url 'booking-list' %}">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-1">
                             <i class="fa fa-caret-square-o-right"></i>
@@ -19,18 +19,18 @@
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{ booking }}</span></div>
-                                <div class="stat-heading">Booking</div>
+                                <div class="stat-heading">Bookings</div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></a>
             </div>
         </div>
 
         {% comment %} client {% endcomment %}
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"><a href="{% url 'client-list' %}">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-6">
                             <i class="fa fa-user-circle-o"></i>
@@ -42,13 +42,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></a>
             </div>
         </div>
 
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"><a href="{% url 'vehicle-list' %}">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-4">
                             <i class="fa fa-truck"></i>
@@ -60,13 +60,13 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></a>
             </div>
         </div>
 
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"><a href="{% url 'driver-list' %}">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-3">
                             <i class="fa fa-users"></i>
@@ -78,7 +78,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></a>
             </div>
         </div>
 
@@ -103,7 +103,7 @@
 
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"><a href="{% url 'product-list' %}">
                     <div class="stat-widget-five">
                         <div class="stat-icon dib flat-color-2">
                             <i class="fa fa-product-hunt"></i>
@@ -115,25 +115,45 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></a>
             </div>
         </div>
 
+        
+
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body">
+                <div class="card-body"><a href="{% url 'popup' %}">
                     <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-7">
+                        <div class="stat-icon dib flat-color-4">
                             <i class="fa fa-money"></i>
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
                                 <div class="stat-text"><span class="count">{{ expenses }}</span></div>
-                                <div class="stat-heading">Expenses (₹)</div>
+                                <div class="stat-heading">Total Expenses (₹)</div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'payment-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-5">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ payment }}</span></div>
+                                <div class="stat-heading">Payment Received (₹)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
             </div>
         </div>
 
@@ -141,7 +161,7 @@
             <div class="card">
                 <div class="card-body"><a href="{% url 'pod-received-list' %}">
                     <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-2">
+                        <div class="stat-icon dib flat-color-1">
                             <i class="fa fa-envelope-open"></i>
                         </div>
                         <div class="stat-content">
@@ -157,28 +177,10 @@
 
         <div class="col-lg-3 col-md-6">
             <div class="card">
-                <div class="card-body"><a href="{% url 'pod-not-received-list' %}">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-2">
-                            <i class="fa fa-envelope-open"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{ podno }}</span></div>
-                                <div class="stat-heading">PODs Not Received</div>
-                            </div>
-                        </div>
-                    </div>
-                </div></a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
                 <div class="card-body"><a href="{% url 'ak-ok-list' %}">
                     <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-2">
-                            <i class="fa fa-envelope"></i>
+                        <div class="stat-icon dib flat-color-1">
+                            <i class="fa fa-envelope-open"></i>
                         </div>
                         <div class="stat-content">
                             <div class="text-left dib">
@@ -191,11 +193,31 @@
             </div>
         </div>
 
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'pod-not-received-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-7">
+                            <i class="fa fa-envelope"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span class="count">{{ podno }}</span></div>
+                                <div class="stat-heading">PODs Not Received</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+
+        
         <div class="col-lg-3 col-md-6">
             <div class="card">
                 <div class="card-body "><a href="{% url 'ak-notok-list' %}">
                     <div class="stat-widget-five" >
-                        <div class="stat-icon dib flat-color-2">
+                        <div class="stat-icon dib flat-color-7">
                             <i class="fa fa-envelope"></i>
                         </div>
                         <div class="stat-content">
@@ -209,23 +231,7 @@
             </div>
         </div>
 
-        <div class="col-lg-3 col-md-6">
-            <div class="card">
-                <div class="card-body">
-                    <div class="stat-widget-five">
-                        <div class="stat-icon dib flat-color-2">
-                            <i class="fa fa-money"></i>
-                        </div>
-                        <div class="stat-content">
-                            <div class="text-left dib">
-                                <div class="stat-text"><span class="count">{{ payment }}</span></div>
-                                <div class="stat-heading">Payment Received (₹)</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
 
         
@@ -241,6 +247,12 @@
                 <div class="card">
                     <div class="card-body">
                         <h4 class="box-title">Bookings</h4>
+                        <a class="btn-sm btn-warning" href="{% url 'booking-pending' %}">Pending</a>
+                        <a class="btn-sm btn-secondary" href="{% url 'booking-processing' %}">Processing</a>
+                        <a class="btn-sm btn-info" href="{% url 'booking-delivered' %}">Delivered</a>
+                        <a class="btn-sm btn-primary" href="{% url 'booking-approved' %}">Approved</a>
+                        <a class="btn-sm btn-success" href="{% url 'booking-complete' %}">Completed</a>
+                        <a class="btn-sm btn-danger" href="{% url 'booking-decline' %}">Decline</a>
                     </div>
                     <div class="card-body--">
                         <div class="table-stats booking-table ov-h">
@@ -285,7 +297,7 @@
                                                 <a class="btn btn-success" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% elif booking.status == 'approved' %}
                                                 <a class="btn btn-primary" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
-                                            {% elif booking.status == 'bulk' %}
+                                            {% elif booking.status == 'processing' %}
                                                 <a class="btn btn-secondary" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>
                                             {% else %}
                                                 <a class="btn btn-info" href="{% url 'update-booking' booking.id %}">{{ booking.status }}</a>

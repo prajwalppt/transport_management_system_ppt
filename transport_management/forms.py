@@ -148,13 +148,13 @@ class ProductForm(forms.Form):
         'data-val': 'true',
         'data-val-required': 'Please enter name of Goods',
     }))
-    rate = forms.IntegerField(widget=forms.TextInput(attrs={
+    value = forms.IntegerField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'data-val': 'true',
-        'data-val-required': 'Please enter rate',
+        'data-val-required': 'Please enter value',
     }))
 
-    weight_in_kg = forms.IntegerField(widget=forms.TextInput(attrs={
+    weight = forms.IntegerField(widget=forms.TextInput(attrs={
         'class': 'form-control',
         'data-val': 'true',
         'data-val-required': 'Please enter weight',
@@ -165,7 +165,7 @@ class ProductForm(forms.Form):
 class BookingForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['client','vehicle','product','no_of_product','driver','loading_date','weight_in_tons','location_from','location_to','freight_amount']
+        fields = ['client','vehicle','product','no_of_product','driver','loading_date','weight','location_from','location_to','freight_amount']
 
         widgets = {
             'client': forms.Select(attrs={
@@ -189,8 +189,8 @@ class BookingForm(forms.ModelForm):
             'loading_date': forms.DateInput(attrs={
                 'class': 'form-control', 'id': 'datepicker1'
             }),
-            'weight_in_tons': forms.NumberInput(attrs={
-                'class': 'form-control', 'id': 'weight_in_tons'
+            'weight': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'weight'
             }),
             'location_from': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'location_from'
@@ -203,15 +203,15 @@ class BookingForm(forms.ModelForm):
             }),
         }
 
-    def multiply_two_integers(rate, no_of_product):
-        freight_amount = rate*no_of_product
+    def multiply_two_integers(value, no_of_product):
+        freight_amount = value*no_of_product
         return freight_amount
 
 #bookingupdate
 class BookingUpdateForm(forms.ModelForm):
     class Meta:
         model = Booking
-        fields = ['client','vehicle','product','no_of_product','driver','loading_date','weight_in_tons','location_from','location_to','freight_amount', 'status']
+        fields = ['client','vehicle','product','no_of_product','driver','loading_date','weight','location_from','location_to','freight_amount', 'status']
 
         widgets = {
             'client': forms.Select(attrs={
@@ -235,8 +235,8 @@ class BookingUpdateForm(forms.ModelForm):
             'loading_date': forms.DateInput(attrs={
                 'class': 'form-control', 'id': 'datepicker1'
             }),
-            'weight_in_tons': forms.NumberInput(attrs={
-                'class': 'form-control', 'id': 'weight_in_tons'
+            'weight': forms.NumberInput(attrs={
+                'class': 'form-control', 'id': 'weight'
             }),
             'location_from': forms.TextInput(attrs={
                 'class': 'form-control', 'id': 'location_from'
@@ -257,7 +257,7 @@ class BookingUpdateForm(forms.ModelForm):
         self.fields['driver'].disabled = True
         self.fields['freight_amount'].disabled = True
         self.fields['loading_date'].disabled = True
-        self.fields['weight_in_tons'].disabled = True
+        self.fields['weight'].disabled = True
         self.fields['location_from'].disabled = True
         self.fields['location_to'].disabled = True
 

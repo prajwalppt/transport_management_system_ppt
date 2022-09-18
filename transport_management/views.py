@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django import forms
 from django.contrib import messages
 from django.core.validators import validate_email
+from django.db.models import Avg, Max, Min, Sum
 # Create your views here.
 
 from users.models import User
@@ -65,6 +66,28 @@ class ClientListView(ListView):
     context_object_name = 'client'
 
 
+#total exp views
+def totexp(request):
+    diesel_expense = Expense.objects.aggregate(diesel = Sum('diesel'))['diesel']
+    fastag_expense = Expense.objects.aggregate(fastag = Sum('fastag'))['fastag']
+    driver_expense = Expense.objects.aggregate(driver_expense = Sum('driver_expense'))['driver_expense']
+    uncertainty_expense = Expense.objects.aggregate(uncertainty = Sum('uncertainty'))['uncertainty']
+    miscellaneous_expense = Expense.objects.aggregate(miscellaneous = Sum('miscellaneous'))['miscellaneous']
+    # model = Expense
+    template_name = 'transport_management/popup.html'
+    # context_object_name = 'totalexp'
+    context = {
+        'diesel_expense': diesel_expense,
+        'fastag_expense': fastag_expense,
+        'driver_expense': driver_expense,
+        'uncertainty_expense': uncertainty_expense,
+        'miscellaneous_expense': miscellaneous_expense,
+        
+
+    }
+
+    return render(request, 'transport_management/popup.html', context)
+
 # Vehicle views
 @login_required(login_url='login')
 def create_vehicle(request):
@@ -91,7 +114,16 @@ def create_vehicle(request):
 class VehicleListView(ListView):
     model = Vehicle
     template_name = 'transport_management/vehicle_list.html'
-    context_object_name = 'vehicle'
+    # context_object_name = 'drop'
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['vehicle'] = Vehicle.objects.all().order_by('-id')
+        return context
+
+# class VehicleListView(ListView):
+#     model = Vehicle
+#     template_name = 'transport_management/vehicle_list.html'
+#     context_object_name = 'vehicle'
 
 
 #Vehiclemaintanance views
@@ -102,7 +134,7 @@ def create_vehiclemaintanance(request):
         forms = VehicleMaintananceForm(request.POST)
         if forms.is_valid():
             forms.save()
-            messages.success(request, 'Vehiclemaintanance record added succesfully')
+            messages.success(request, 'Vehicle Maintanance record added succesfully')
             return redirect('vehiclemaintanance-list')
     context = {
         'form': forms
@@ -170,8 +202,8 @@ def create_product(request):
         if forms.is_valid():
             Product.objects.create(
                 name =forms.cleaned_data['name'],
-                weight_in_kg =forms.cleaned_data['weight_in_kg'],
-                rate =forms.cleaned_data['rate']
+                weight =forms.cleaned_data['weight'],
+                value =forms.cleaned_data['value']
             )
             messages.success(request, 'Product added succesfully')
             return redirect('product-list')
@@ -186,17 +218,118 @@ class ProductListView(ListView):
     context_object_name = 'product'
 
 
-# Booking views
+# Booking new views
 @login_required(login_url='login')
 def create_booking(request):
     forms = BookingForm()
+    product = Product.objects.all()
+
     if request.method == 'POST':
         forms = BookingForm(request.POST)
         if forms.is_valid():
-            forms.save()
+            Booking.objects.create(
+                client =forms.cleaned_data['client'],
+                vehicle =forms.cleaned_data['vehicle'],
+                product =forms.cleaned_data['product'],
+                no_of_product =forms.cleaned_data['no_of_product'],
+                driver =forms.cleaned_data['driver'],
+                weight =forms.cleaned_data['weight'],
+                location_from =forms.cleaned_data['location_from'],
+                location_to =forms.cleaned_data['location_to'],
+                loading_date =forms.cleaned_data['loading_date'],
+                freight_amount =forms.cleaned_data['freight_amount'],
+                # status =forms.cleaned_data['status']
+            )
             messages.success(request, 'Booking created succesfully')
             return redirect('booking-list')
-    return render(request, 'transport_management/create_booking.html', {'form': forms })
+    context = {
+        'form': forms, 'product': product
+    }
+    return render(request, 'transport_management/create_booking.html', context)
+
+
+#Booking Pending 
+class BookingPendingListView(ListView):
+    model = Booking
+    template_name = 'transport_management/booking_pending_list.html'
+    context_object_name = 'bookingpending'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookingpending"] = Booking.objects.filter(status='pending')
+        return context
+
+#Booking Processing 
+class BookingProcessingListView(ListView):
+    model = Booking
+    template_name = 'transport_management/booking_processing_list.html'
+    context_object_name = 'bookingprocessing'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookingprocessing"] = Booking.objects.filter(status='processing')
+        return context
+
+#Booking Delivered 
+class BookingDeliveredListView(ListView):
+    model = Booking
+    template_name = 'transport_management/booking_delivered_list.html'
+    context_object_name = 'bookingdelivered'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookingdelivered"] = Booking.objects.filter(status='deliverd')
+        return context
+
+
+#Booking Approved 
+class BookingApprovedListView(ListView):
+    model = Booking
+    template_name = 'transport_management/booking_approved_list.html'
+    context_object_name = 'bookingapproved'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookingapproved"] = Booking.objects.filter(status='approved')
+        return context
+
+#Booking Complete 
+class BookingCompleteListView(ListView):
+    model = Booking
+    template_name = 'transport_management/booking_complete_list.html'
+    context_object_name = 'bookingcomplete'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookingcomplete"] = Booking.objects.filter(status='complete')
+        return context
+
+#Booking Decline 
+class BookingDeclineListView(ListView):
+    model = Booking
+    template_name = 'transport_management/booking_decline_list.html'
+    context_object_name = 'bookingdecline'
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["bookingdecline"] = Booking.objects.filter(status='decline')
+        return context
+
+
+# Booking views
+
+# @login_required(login_url='login')
+# def create_booking(request):
+#     forms = BookingForm()
+#     product = Product.objects.all()
+
+#     if request.method == 'POST':
+#         forms = BookingForm(request.POST)
+#         if forms.is_valid():
+#             forms.save()
+#             messages.success(request, 'Booking created succesfully')
+#             return redirect('booking-list')
+#     return render(request, 'transport_management/create_booking.html', {'form': forms, 'product': product })
 
 
 
@@ -217,6 +350,10 @@ class BookingListView(ListView):
 @login_required(login_url='login')
 def update_booking(request,id):
     data = Booking.objects.get(pk=id)
+    context = {
+        'data': data,
+        }
+
 
     if request.method == 'POST':
         BookingUpdateForm(request.POST,instance=data).save()
@@ -227,8 +364,7 @@ def update_booking(request,id):
         context = { 'form': form }
         # messages.success(request, 'Booking status updated succesfully')
         return render(request, 'transport_management/update_booking.html', context)
-
-
+    
 #Expense views
 @login_required(login_url='login')
 def create_expense(request):

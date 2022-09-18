@@ -1,0 +1,113 @@
+{% extends 'base/base.html' %}
+
+{% block title %}Dashboard{% endblock title %}
+
+{% block content %}
+    <!-- Widgets  -->
+    
+
+    <div class="row">
+
+
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'expense-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span id="dieselExp" class="count">{{ diesel_expense }}</span></div>
+                                <div class="stat-heading">Diesel Expenses (₹)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'expense-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span  id="fastagExp"  class="count">{{ fastag_expense }}</span></div>
+                                <div class="stat-heading">Fastag Expenses (₹)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'expense-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span id="driverExp" class="count">{{ driver_expense }}</span></div>
+                                <div class="stat-heading">Driver Expenses (₹)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'expense-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span  id="uncertExp" class="count">{{ uncertainty_expense }}</span></div>
+                                <div class="stat-heading">Uncertainty Expenses (₹)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="card-body"><a href="{% url 'expense-list' %}">
+                    <div class="stat-widget-five">
+                        <div class="stat-icon dib flat-color-4">
+                            <i class="fa fa-money"></i>
+                        </div>
+                        <div class="stat-content">
+                            <div class="text-left dib">
+                                <div class="stat-text"><span id="misExp" class="count">{{ miscellaneous_expense }}</span></div>
+                                <div class="stat-heading">Miscellaneous Expenses (₹)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div></a>
+            </div>
+        </div>
+
+        
+
+        
+    </div>
+    <!-- /Widgets -->
+    
+    <div class="clearfix"></div>
+
+    
+    <!-- /.bookings -->
+{% endblock content %}

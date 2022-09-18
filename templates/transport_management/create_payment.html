@@ -40,37 +40,10 @@
                 <!-- Credit Card -->
                 <div id="pay-invoice">
                     <div class="card-body">
-                        <form action="#" method="post" novalidate="novalidate">
+                        <form action="#" method="post" novalidate="novalidate" onsubmit="return confirm ('Are you sure? Data once submitted cannot be changed !!!')">
                             {% csrf_token %}
                             {{form}}
-                            <!-- <div class="form-group">
-                                <label for="supplier" class="control-label mb-1">Client</label>
-                                {{ form.supplier }}
-                            </div>
-                            <div class="form-group">
-                                <label for="product" class="control-label mb-1">Product</label>
-                                {{ form.product }}
-                            </div>
-                            <div class="form-group">
-                                <label for="buyer" class="control-label mb-1">Vehicle</label>
-                                {{ form.buyer }}
-                            </div>
-                            <div class="form-group">
-                                <label for="season" class="control-label mb-1">Driver</label>
-                                {{ form.season }}
-                            </div>
-                            {% comment %} <div class="form-group">
-                                <label for="drop" class="control-label mb-1">Drop</label>
-                                {{ form.drop }}
-                            </div> {% endcomment %}
-                            <div class="form-group">
-                                <label for="design" class="control-label mb-1">Frieght Amount</label>
-                                {{ form.design }}
-                            </div>
-                            <div class="form-group">
-                                <label for="color" class="control-label mb-1">Advance Paid amount</label>
-                                {{ form.color }}
-                            </div> -->
+                            
                             <br>
                             <div>
                                 <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
