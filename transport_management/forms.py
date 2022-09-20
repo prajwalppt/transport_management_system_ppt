@@ -368,21 +368,3 @@ class PaymentForm(forms.ModelForm):
                 'class': 'form-control', 'id': 'datepicker1'
             }),           
         }
-
-
-# class SupplierFormUpdate(forms.ModelForm):
-#     class Meta:
-#         model = Supplier
-#         fields = ['name','address','email']
-
-#         widgets = {
-#             'name': forms.TextInput(attrs={
-#                 'class': 'form-control', 'id': 'name'
-#             }),
-#             'address': forms.TextInput(attrs={
-#                 'class': 'form-control', 'id': 'address'
-#             }),
-#             'email': forms.TextInput(attrs={
-#                 'class': 'form-control', 'id': 'email'
-#             }),
-#         }

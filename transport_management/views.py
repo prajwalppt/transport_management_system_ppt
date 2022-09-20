@@ -316,22 +316,6 @@ class BookingDeclineListView(ListView):
         return context
 
 
-# Booking views
-
-# @login_required(login_url='login')
-# def create_booking(request):
-#     forms = BookingForm()
-#     product = Product.objects.all()
-
-#     if request.method == 'POST':
-#         forms = BookingForm(request.POST)
-#         if forms.is_valid():
-#             forms.save()
-#             messages.success(request, 'Booking created succesfully')
-#             return redirect('booking-list')
-#     return render(request, 'transport_management/create_booking.html', {'form': forms, 'product': product })
-
-
 
 def amount(request):
     result = Product.objects.all()
@@ -463,19 +447,6 @@ class AkOkListView(ListView):
 
 
 
-
-# class PodFilterView(ListView):
-#     received_query = request.GET.get('received')
-#     print(received)
-    # def pod_received(request):
-    #     received_pod = Pod.objects.filter(received='yes')
-    
-    #     print(pod_received)
-    #     context = {
-    #     'received': pod_received
-    #         }
-
-
 #Payment views
 @login_required(login_url='login')
 def create_payment(request):
@@ -492,15 +463,3 @@ class PaymentListView(ListView):
     model = Payment
     template_name = 'transport_management/payment_list.html'
     context_object_name = 'payment'
-
-
-# #Invoice views
-# @login_required(login_url='login')
-# def create_invoice(request):
-#     forms = PaymentForm()
-#     if request.method == 'POST':
-#         forms = PaymentForm(request.POST)
-#         if forms.is_valid():
-#             forms.save()
-#             return redirect('payment-list')
-#     return render(request, 'transport_management/create_payment.html', {'form': forms })
