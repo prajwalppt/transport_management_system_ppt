@@ -68,10 +68,7 @@
                                 <td>{{ client.email }}</td>
                                 <td>{{ client.address }}</td>
                                 <td>{{ client.created_date }}</td>
-                                {% comment %} <td>
-                                    <a href="{% url 'client-delete' client.id %}" class="btn btn-sm btn-danger">Delete</a> 
-                                    <a href="{% url 'update-client' client.id %}" class="btn btn-sm btn-warning">Edit</a>
-                                </td> {% endcomment %}
+                                
                             </tr>
                             {% endfor %}
                             {% else %}
