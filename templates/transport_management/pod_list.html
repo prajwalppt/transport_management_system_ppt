@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Driver List{% endblock title %}
+{% block title %}POD List{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Driver</a></li>
+                            <li><a href="#">POD</a></li>
                             <li class="active">List</li>
                         </ol>
                     </div>
@@ -34,7 +34,7 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="box-title">Drivers List </h4>
+                <h4 class="box-title">PODs List </h4>
             </div>
             <div class="card-body--">
                 {% for msg in messages %}
@@ -50,35 +50,48 @@
                         <thead>
                             <tr>
                                 <th class="serial">#</th>
-                                <th>Name</th>
-                                <th>Phone No</th>
-                                <th>Aadhar Card No</th>
-                                {% comment %} <th>id</th> {% endcomment %}
-                                <th>Liscence No</th>
-                                <th>Liscence Expiry Date</th>
-                                <th>Joining Date</th>
-                                {% comment %} <th>Created Date</th> {% endcomment %}
+                                <th>Bilty No</th>
+                                <th>Received</th>
+                                <th>Received Date</th>
+                                <th>Aknowledgement</th>
+                                <th>Remarks</th>
+                                <th>Created Date</th>
+                                <th>Edit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {% if driver %}
-                            {% for driver in driver %}
+                            {% if pod %}
+                            {% for pod in pod %}
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
-                                <td>{{ driver.name }}</td>
-                                <td>{{ driver.phone_number }}</td>
-                                <td>{{ driver.aadhar_card_no }}</td>
-                                {% comment %} <td>{{ driver.id }}</td> {% endcomment %}
-                                <td>{{ driver.liscence_no }}</td>
-                                <td>{{ driver.liscence_expiry_date }}</td>
-                                <td>{{ driver.joining_date }}</td>
-                                {% comment %} <td>{{ driver.created_date }}</td> {% endcomment %}
+                                <td>{{ pod.booking_no }}</td>
+                                <td>{{ pod.received }}</td>
+                                <td>{{ pod.received_date }}</td>
+                                <td>{{ pod.aknowledgement }}</td>
+                                <td>{{ pod.remarks }}</td>
+                                <td>{{ pod.created_date }}</td>
+                                <td>
+                                    <a href="{% url 'update-pod' pod.id %}" class=" btn-sm btn-primary">Edit</a>
+                                </td>
                             </tr>
                             {% endfor %}
                             {% else %}
-                                <tr><td>No Driver Data</td></tr>
+                                <tr><td>No POD Data</td></tr>
                             {% endif %}
                         </tbody>
+                        {% comment %} <tbody>
+                            {% if pod %}
+                            {% for pod in pod %}
+                            <tr>
+                                <td class="serial">{{ forloop.counter }}</td>
+                                <td>{{ received }}</td>
+                                
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                                <tr><td>No POD Data</td></tr>
+                            {% endif %}
+                        </tbody> {% endcomment %}
                     </table>
                 </div> <!-- /.table-stats -->
             </div>

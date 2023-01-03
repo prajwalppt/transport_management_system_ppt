@@ -34,9 +34,17 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="box-title">Product List </h4>
+                <h4 class="box-title">Products List </h4>
             </div>
             <div class="card-body--">
+                {% for msg in messages %}
+                    <div class="col-xl-12"><div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
                 <div class="table-stats order-table ov-h">
                     <table class="table ">
                         <thead>
@@ -54,8 +62,8 @@
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
                                 <td>{{ product.name }}</td>
-                                <td>{{ product.weight_in_kg }}</td>
-                                <td>{{ product.rate }}</td>
+                                <td>{{ product.weight }}</td>
+                                <td>{{ product.value }}</td>
                                 <td>{{ product.created_date }}</td>
                             </tr>
                             {% endfor %}

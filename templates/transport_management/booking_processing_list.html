@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Booking List{% endblock title %}
+{% block title %}Processing Bookings List{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -34,13 +34,7 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="box-title">Bookings List </h4>
-                <a class="btn-sm btn-warning" href="{% url 'booking-pending' %}">Pending</a>
-                <a class="btn-sm btn-secondary" href="{% url 'booking-processing' %}">Processing</a>
-                <a class="btn-sm btn-info" href="{% url 'booking-delivered' %}">Delivered</a>
-                <a class="btn-sm btn-primary" href="{% url 'booking-approved' %}">Approved</a>
-                <a class="btn-sm btn-success" href="{% url 'booking-complete' %}">Completed</a>
-                <a class="btn-sm btn-danger" href="{% url 'booking-decline' %}">Decline</a>
+                <h4 class="box-title">Processing Bookings List </h4>
             </div>
             <div class="card-body--">
                 {% for msg in messages %}
@@ -71,37 +65,37 @@
                             </tr>
                         </thead>
                         <tbody>
-                            {% if booking %}
-                            {% for booking in booking %}
+                            {% if bookingprocessing %}
+                            {% for bookingprocessing in bookingprocessing %}
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
-                                <td>{{ booking.id }}</td>
-                                <td>{{ booking.client }}</td>
-                                <td>{{ booking.vehicle }}</td>
-                                <td>{{ booking.product }}</td>
-                                <td>{{ booking.driver }}</td>
-                                <td>{{ booking.loading_date }}</td>
-                                <td>{{ booking.weight }}</td>
-                                <td>{{ booking.location_from }}</td>
-                                <td>{{ booking.location_to }}</td>
-                                <td>{{ booking.freight_amount }}</td>
+                                <td>{{ bookingprocessing.id }}</td>
+                                <td>{{ bookingprocessing.client }}</td>
+                                <td>{{ bookingprocessing.vehicle }}</td>
+                                <td>{{ bookingprocessing.product }}</td>
+                                <td>{{ bookingprocessing.driver }}</td>
+                                <td>{{ bookingprocessing.loading_date }}</td>
+                                <td>{{ bookingprocessing.weight }}</td>
+                                <td>{{ bookingprocessing.location_from }}</td>
+                                <td>{{ bookingprocessing.location_to }}</td>
+                                <td>{{ bookingprocessing.freight_amount }}</td>
                                 <td>
-                                    {% if booking.status == 'pending' %}
-                                        <a class="btn-sm btn-warning" href="">{{ booking.status }}</a>
-                                    {% elif booking.status == 'decline' %}
-                                        <a class="btn-sm btn-danger" href="">{{ booking.status }}</a>
-                                    {% elif booking.status == 'complete' %}
-                                        <a class="btn-sm btn-success" href="">{{ booking.status }}</a>
-                                    {% elif booking.status == 'approved' %}
-                                        <a class="btn-sm btn-primary" href="">{{ booking.status }}</a>
-                                    {% elif booking.status == 'processing' %}
-                                        <a class="btn-sm btn-secondary" href="">{{ booking.status }}</a>
+                                    {% if bookingprocessing.status == 'pending' %}
+                                        <a class="btn-sm btn-warning" href="">{{ bookingprocessing.status }}</a>
+                                    {% elif bookingprocessing.status == 'decline' %}
+                                        <a class="btn-sm btn-danger" href="">{{ bookingprocessing.status }}</a>
+                                    {% elif bookingprocessing.status == 'complete' %}
+                                        <a class="btn-sm btn-success" href="">{{ bookingprocessing.status }}</a>
+                                    {% elif bookingprocessing.status == 'approved' %}
+                                        <a class="btn-sm btn-primary" href="">{{ bookingprocessing.status }}</a>
+                                    {% elif bookingprocessing.status == 'processing' %}
+                                        <a class="btn-sm btn-secondary" href="">{{ bookingprocessing.status }}</a>
                                     {% else %}
-                                        <a class="btn-sm btn-info" href="">{{ booking.status }}</a>
+                                        <a class="btn-sm btn-info" href="">{{ bookingprocessing.status }}</a>
                                     {% endif %}
                                 </td>
                                 <td>
-                                    <a href="{% url 'update-booking' booking.id %}" class=" btn-sm btn-primary">Edit</a>
+                                    <a href="{% url 'update-booking' bookingprocessing.id %}" class=" btn-sm btn-primary">Edit</a>
                                 </td>
                             </tr>
                             {% endfor %}

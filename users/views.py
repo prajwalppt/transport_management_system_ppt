@@ -27,25 +27,6 @@ def login_page(request):
     return render(request, 'users/login.html', context)
 
 
-# class SignUp(View):
-#     def get(self,request):
-#         print()
-#         form = SignUpForm()
-#         return render(request,'users/signup.html',{'form':form})
-#     def post(self,request):
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             # email = form.cleaned_data['username']
-#             # user = User.objects.get(username=email)
-#             # user.email = email
-#             # user.save()
-#             # messages.success(request,f'Account Created Successfully {email}')
-#             return HttpResponseRedirect('/signup/')
-#         else:
-#             return render(request,'users/signup.html',{'form':form})
-
-
 def logout_page(request):
     print("log out")
     logout(request)

@@ -1,6 +1,6 @@
 {% extends 'base/base.html' %}
 
-{% block title %}Delivery List{% endblock title %}
+{% block title %}Payment List{% endblock title %}
 
 {% block breadcrumbs %}
 <div class="breadcrumbs">
@@ -18,7 +18,7 @@
                     <div class="page-title">
                         <ol class="breadcrumb text-right">
                             <li><a href="#">Dashboard</a></li>
-                            <li><a href="#">Delivery</a></li>
+                            <li><a href="#">Payment</a></li>
                             <li class="active">List</li>
                         </ol>
                     </div>
@@ -34,31 +34,48 @@
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="box-title">Delivery List </h4>
+                <h4 class="box-title">Payments List </h4>
             </div>
             <div class="card-body--">
+                {% for msg in messages %}
+                    <div class="col-xl-12"><div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Message:</strong> {{ msg }}
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                {% endfor %}
                 <div class="table-stats order-table ov-h">
                     <table class="table ">
                         <thead>
                             <tr>
+
                                 <th class="serial">#</th>
-                                <th>Order</th>
-                                <th>Courier Name</th>
-                                <th>Date</th>
+                                <th>Bilty No</th>
+                                <th>Amount(₹)</th>
+                                <th>Mode</th>
+                                <th>Transaction No</th>
+                                <th>Payment Date</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            {% if delivery %}
-                            {% for delivery in delivery %}
+                            {% if payment %}
+                            {% for payment in payment %}
                             <tr>
                                 <td class="serial">{{ forloop.counter }}</td>
-                                <td>{{ delivery.order }}</td>
-                                <td>{{ delivery.courier_name }}</td>
-                                <td>{{ delivery.created_date }}</td>
+                                <td>{{ payment.booking_no }}</td>
+                                <td>{{ payment.amount }}</td>
+                                <td>{{ payment.mode }}</td>
+                                <td>{{ payment.transaction_no }}</td>
+                                <td>{{ payment.payment_date }}</td>
+                                {% comment %} <td>
+                                    <a href="{% url 'update-payment' payment.id %}" class=" btn-sm btn-primary">Edit</a>
+                                </td> {% endcomment %}
                             </tr>
                             {% endfor %}
                             {% else %}
-                                <tr><td>No Delivery Data</td></tr>
+                                <tr><td>No Payment Data</td></tr>
                             {% endif %}
                         </tbody>
                     </table>

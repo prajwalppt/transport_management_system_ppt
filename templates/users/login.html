@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Store | Login</title>
+    <title>TMS | Login</title>
     <meta name="description" content="Ela Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,8 +33,9 @@
         <div class="container">
             <div class="login-content">
                 <div class="login-logo">
+                    <h1 style="color: #fff">Vidhi Trailer Services</h1>
                     <h2 style="color: #fff">Transport Management System</h2>
-                </div>
+                </div><br>
                 <div class="login-form">
                     <form method="POST">
                         {% csrf_token %}
@@ -51,9 +52,9 @@
                             <label>
                                 <input type="checkbox"> Remember Me
                             </label>
-                            <label class="pull-right">
+                            {% comment %} <label class="pull-right">
                                 <a href="#">Forgotten Password?</a>
-                            </label>
+                            </label> {% endcomment %}
 
                         </div>
                         <button type="submit" class="btn btn-success btn-flat m-b-30 m-t-30">Log in</button>
@@ -63,9 +64,9 @@
                                 <button type="button" class="btn social twitter btn-flat btn-addon mt-2"><i class="ti-twitter"></i>Sign in with twitter</button>
                             </div> {% endcomment %}
                         </div>
-                        <div class="register-link m-t-15 text-center">
+                        {% comment %} <div class="register-link m-t-15 text-center">
                             <p>Don't have account ? <a href="#"> Sign Up Here</a></p>
-                        </div>
+                        </div> {% endcomment %}
                     </form>
                 </div>
             </div>

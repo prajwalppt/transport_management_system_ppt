@@ -4,18 +4,20 @@ from . import Client, Vehicle, Product, Driver
 class Booking(models.Model):
     STATUS_CHOICE = (
         ('pending', 'Pending'),
-        ('decline', 'Decline'),
-        ('approved', 'Approved'),
         ('processing', 'Processing'),
-        ('complete', 'Complete'),
         ('deliverd', 'Delivered'),
+        ('approved', 'Approved'),
+        ('complete', 'Complete'),
+        ('decline', 'Decline'),   
+        
     )
     client = models.ForeignKey(Client,on_delete=models.CASCADE)
     vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE)
     product = models.ForeignKey(Product,on_delete=models.CASCADE)
     no_of_product = models.IntegerField()
     driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
-    weight_in_tons =  models.IntegerField()
+    weight =  models.IntegerField()
+    # weight_in_tons =  models.IntegerField()
     location_from = models.CharField(max_length=70)
     location_to= models.CharField(max_length=70)
     loading_date = models.DateField()
